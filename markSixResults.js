@@ -95,7 +95,15 @@
         NET_GAINS[netGainType] += (prices[resultCount] || 0) + (
                 PRICES[resultCount] || 0);
         return resultCount;
-    };
+    }, frequentNumberPriceResultCountSum = frequentNumberPriceResultCounts => [
+        ...frequentNumberPriceResultCounts
+    ].reduce((sum, [count, times]) => sum + +count * times, 0);
+    const frequentNumberPositivePriceResultCountSum = frequentNumberPriceResultCounts => [
+        ...frequentNumberPriceResultCounts
+    ].reduce((sum, [count, times]) => {
+        const countNumber = +count;
+        return countNumber < 3 ? sum : sum + countNumber * times;
+    }, 0);
     RESULTS.forEach(collectResults);
     console.info("RESULTS", RESULTS);
     console.info("FREQUENCIES", FREQUENCIES);
@@ -108,15 +116,15 @@
     console.info("LEAST_FREQUENT_NUMBER_PRICE_RESULT_COUNTS", LEAST_FREQUENT_NUMBER_PRICE_RESULT_COUNTS);
     console.info("MIDDLE_FREQUENT_NUMBER_PRICE_RESULT_COUNTS", MIDDLE_FREQUENT_NUMBER_PRICE_RESULT_COUNTS);
     console.info("MOST_FREQUENT_NUMBER_PRICE_RESULT_COUNTS", MOST_FREQUENT_NUMBER_PRICE_RESULT_COUNTS);
-    console.info("TOTAL_COST", TOTAL_COST);
-    const frequentNumberPriceResultCountSum = frequentNumberPriceResultCounts => [
-        ...frequentNumberPriceResultCounts
-    ].reduce((sum, [count, times]) => sum + +count * times, 0);
     console.info("leastFrequentNumberPriceResultCountSum", frequentNumberPriceResultCountSum(LEAST_FREQUENT_NUMBER_PRICE_RESULT_COUNTS));
     console.info("middleFrequentNumberPriceResultCountSum", frequentNumberPriceResultCountSum(MIDDLE_FREQUENT_NUMBER_PRICE_RESULT_COUNTS));
     console.info("mostFrequentNumberPriceResultCountSum", frequentNumberPriceResultCountSum(MOST_FREQUENT_NUMBER_PRICE_RESULT_COUNTS));
+    console.info("leastFrequentNumberPositivePriceResultCountSum", frequentNumberPositivePriceResultCountSum(LEAST_FREQUENT_NUMBER_PRICE_RESULT_COUNTS));
+    console.info("middleFrequentNumberPositivePriceResultCountSum", frequentNumberPositivePriceResultCountSum(MIDDLE_FREQUENT_NUMBER_PRICE_RESULT_COUNTS));
+    console.info("mostFrequentNumberPositivePriceResultCountSum", frequentNumberPositivePriceResultCountSum(MOST_FREQUENT_NUMBER_PRICE_RESULT_COUNTS));
     console.info("leastFrequentNumbers", frequentNumbers(leastFrequentNumberComparator));
     console.info("middleFrequentNumbers", middleFrequentNumbers());
     console.info("mostFrequentNumbers", frequentNumbers(mostFrequentNumberComparator));
+    console.info("TOTAL_COST", TOTAL_COST);
     console.info("NET_GAINS", NET_GAINS);
 })();

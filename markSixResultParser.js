@@ -26,11 +26,14 @@
     }, parsedPrices = div => {
         const prices = new Map();
         const span6_ = div.getElementsByClassName(RESULT_6_CLASS).item(0);
-        if (span6_) prices.set("6", +removeInnerHTML(span6_, RESULT_REGEX));
+        if (span6_) {
+            const price = +removeInnerHTML(span6_, RESULT_REGEX);
+            if (price) prices.set("6", price);
+        }
         const spanOthers = div.getElementsByClassName(RESULT_OTHER_CLASS);
         [...new Array(spanOthers.length - 4)].forEach((_, i) => {
             const price = +removeInnerHTML(spanOthers.item(i), RESULT_REGEX);
-            prices.set(`${5.5 - i * 0.5}`, price);
+            if (price) prices.set(`${5.5 - i * 0.5}`, price);
         });
         return Object.fromEntries(prices);
     }, removeInnerHTML = ({ innerHTML }, regex) => remove(innerHTML, regex);
@@ -44,12 +47,11 @@
     }, exportJSONDom = () => {
         var a = document.createElement('a');
         a.download = JSON_PATH, a.href = window.URL.createObjectURL(new Blob([
-            `OLD_RESULTS = ${JSON.stringify(OLD_RESULTS)}`
+            `OLD_RESULTS = ${JSON.stringify(OLD_RESULTS, null, "\t")}`
         ], { type: 'text/json' }));
         a.dataset.downloadurl = ['text/json', a.download, a.href].join(':');
         return a;
-    }
-    const result = parsedResult(BODY_INNER_HTML);
+    }, result = parsedResult(BODY_INNER_HTML);
     console.info("result", result);
     OLD_RESULTS.push(result);
     console.info("OLD_RESULTS", OLD_RESULTS);
