@@ -53,6 +53,10 @@
         return a;
     }, result = parsedResult(CONTAINER_INNER_HTML);
     console.info("result", result);
+    const date = result[0];
+    if (new Map(OLD_RESULTS).has(date)) {
+        console.warn(`OLD_RESULTS already has ${date}!`);
+    }
     OLD_RESULTS.push(result);
     const dates = OLD_RESULTS.map(oldResult => {
         return oldResult[0].split("/").reverse().join("/");
