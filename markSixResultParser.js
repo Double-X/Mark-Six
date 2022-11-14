@@ -51,7 +51,7 @@
         ], { type: 'text/json' }));
         a.dataset.downloadurl = ['text/json', a.download, a.href].join(':');
         return a;
-    }, result = parsedResult(BODY_INNER_HTML);
+    }, result = parsedResult(CONTAINER_INNER_HTML);
     console.info("result", result);
     OLD_RESULTS.push(result);
     console.info("OLD_RESULTS", OLD_RESULTS);
