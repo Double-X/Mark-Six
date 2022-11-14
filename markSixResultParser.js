@@ -54,6 +54,25 @@
     }, result = parsedResult(CONTAINER_INNER_HTML);
     console.info("result", result);
     OLD_RESULTS.push(result);
+    const dates = OLD_RESULTS.map(result => {
+        return result[0].split("/").reverse().join("/");
+    }), dateCount = dates.length;
+    for (let i = 1; i < dateCount; i++) {
+        const ithDateString = dates[i], iMinus1thDateString = dates[i - 1];
+        const ithDate = new Date(ithDateString);
+        const iMinus1thDate = new Date(iMinus1thDateString);
+        const timeDifference = ithDate.getTime() - iMinus1thDate.getTime();
+        const dateDifference = timeDifference / 86400000;
+        if (dateDifference > 3) {
+            console.warn(`Date of index ${i}: ${ithDateString}`);
+            console.warn(`Date of index ${i - 1}: ${iMinus1thDateString}`);
+            console.warn(`Difference is ${dateDifference} but should be <= 3!`);
+        }
+        if (ithDateString > iMinus1thDateString) continue;
+        console.warn(`Date of index ${i}: ${ithDateString}`);
+        console.warn(`Date of index ${i - 1}: ${iMinus1thDateString}`);
+        console.warn(`Date of index ${i} should be > Date of index ${i - 1}!`);
+    }
     console.info("OLD_RESULTS", OLD_RESULTS);
     exportJSON(exportJSONDom());
 })();
