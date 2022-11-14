@@ -64,9 +64,9 @@
         const timeDifference = ithDate.getTime() - iMinus1thDate.getTime();
         const dateDifference = timeDifference / 86400000;
         if (dateDifference > 3) {
-            console.warn(`Date of index ${i}: ${ithDateString}`);
-            console.warn(`Date of index ${i - 1}: ${iMinus1thDateString}`);
-            console.warn(`Difference is ${dateDifference} but should be <= 3!`);
+            console.warn(`Date of index ${i}: ${ithDateString}`,
+                    `Date of index ${i - 1}: ${iMinus1thDateString}`,
+                    `Difference is ${dateDifference} but should be <= 3!`);
         }
         if (ithDateString > iMinus1thDateString) continue;
         console.warn(`Date of index ${i}: ${ithDateString}`);
