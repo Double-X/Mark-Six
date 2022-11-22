@@ -78,6 +78,6 @@
         console.warn(`Date of index ${i - 1}: ${iMinus1thDateString}`);
         console.warn(`Difference is ${dateDifference} but should be > 1!`);
     }
-    console.info("OLD_RESULTS", OLD_RESULTS);
+    // console.info("OLD_RESULTS", OLD_RESULTS);
     exportJSON(exportJSONDom());
 })();
