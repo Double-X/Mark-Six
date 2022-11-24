@@ -3,7 +3,8 @@
     const JSON_PATH = "oldMarkSixResults.json";
     const NUMBER_CLASS = "resultDetailsInner";
     const NUMBER_INDICES = [0, 1, 2, 3, 4, 5, 7];
-    const NUMBER_SRC_POST = ".gif?CV=L4.02R1";
+    const NUMBER_SRC_NEW_POST = ".gif?CV=L4.02R1_CRQ129532";
+    const NUMBER_SRC_OLD_POST = ".gif?CV=L4.02R1";
     const NUMBER_SRC_PRE = "file:///F:/marksix/info/images/icon/no_";
     const RESULT_6_CLASS = "orangeNum2", RESULT_OTHER_CLASS = "orangeNum1";
     const RESULT_REGEX = /\D+/gmi;
@@ -21,21 +22,23 @@
         const spans = div.getElementsByClassName(NUMBER_CLASS);
         return NUMBER_INDICES.map(index => {
             const src = spans.item(index).children.item(0).src;
-            return `${+remove(remove(src, NUMBER_SRC_PRE), NUMBER_SRC_POST)}`;
+            const srcNoPre = remove(src, NUMBER_SRC_PRE);
+            const srcNoNewPost = remove(srcNoPre, NUMBER_SRC_NEW_POST);
+            return `${+remove(srcNoNewPost, NUMBER_SRC_OLD_POST)}`;
         });
     }, parsedPrices = div => {
-        const prices = new Map();
+        const prices = {};
         const span6_ = div.getElementsByClassName(RESULT_6_CLASS).item(0);
         if (span6_) {
             const price = +removeInnerHTML(span6_, RESULT_REGEX);
-            if (price) prices.set("6", price);
+            if (price) prices["6"] = price;
         }
         const spanOthers = div.getElementsByClassName(RESULT_OTHER_CLASS);
         [...new Array(spanOthers.length - 4)].forEach((_, i) => {
             const price = +removeInnerHTML(spanOthers.item(i), RESULT_REGEX);
-            if (price) prices.set(`${5.5 - i * 0.5}`, price);
+            if (price) prices[`${5.5 - i * 0.5}`] = price;
         });
-        return Object.fromEntries(prices);
+        return prices;
     }, removeInnerHTML = ({ innerHTML }, regex) => remove(innerHTML, regex);
     const remove = (string, regex) => string.replace(regex, "");
     const exportJSON = a => a.dispatchEvent(exportJSONEvent());
@@ -44,9 +47,10 @@
         event.initMouseEvent('click', true, false, window, 0, 0, 0, 0, 0,
                 false, false, false, false, 0, null);
         return event;
-    }, exportJSONDom = () => {
+    }, exportJSONDom = date => {
         var a = document.createElement('a');
-        a.download = JSON_PATH, a.href = window.URL.createObjectURL(new Blob([
+        a.download = `${date}${JSON_PATH}`;
+        a.href = window.URL.createObjectURL(new Blob([
             `OLD_RESULTS = ${JSON.stringify(OLD_RESULTS, null, "\t")}`
         ], { type: 'text/json' }));
         a.dataset.downloadurl = ['text/json', a.download, a.href].join(':');
@@ -57,6 +61,11 @@
     if (new Map(OLD_RESULTS).has(date)) {
         console.warn(`OLD_RESULTS already has ${date}!`);
     }
+    const { numbers, prices } = result[1];
+    if (numbers.some(number => isNaN(number))) console.warn("numbers", numbers);
+    if (Object.entries(prices).some(([number, price]) => {
+        return isNaN(number) || isNaN(price);
+    })) console.warn("prices", prices);
     OLD_RESULTS.push(result);
     const dates = OLD_RESULTS.map(oldResult => {
         return oldResult[0].split("/").reverse().join("/");
@@ -79,5 +88,5 @@
         console.warn(`Difference is ${dateDifference} but should be > 1!`);
     }
     console.info("OLD_RESULTS", OLD_RESULTS);
-    exportJSON(exportJSONDom());
+    exportJSON(exportJSONDom(date));
 })();
