@@ -19,6 +19,10 @@
     const LEAST_FREQUENT_NUMBER_PRICE_RESULTS = new Map();
     const LEAST_FREQUENT_NUMBER_PRICE_RESULT_COUNTS = new Map(
             FREQUENT_NUMBER_PRICE_RESULT_COUNTS);
+    const LEAST_FREQUENT_OVER_OLDEST_NUMBERS = new Map();
+    const LEAST_FREQUENT_OVER_OLDEST_NUMBER_PRICE_RESULTS = new Map();
+    const LEAST_FREQUENT_OVER_OLDEST_NUMBER_PRICE_RESULT_COUNTS = new Map(
+            FREQUENT_NUMBER_PRICE_RESULT_COUNTS);
     const MIDDLE_FREQUENT_NUMBERS = new Map();
     const MIDDLE_FREQUENT_NUMBER_PRICE_RESULTS = new Map();
     const MIDDLE_FREQUENT_NUMBER_PRICE_RESULT_COUNTS = new Map(
@@ -37,6 +41,7 @@
     const RESULTS = new Map(OLD_RESULTS);
     const TOTAL_COST = -COST * RESULTS.size, NET_GAINS = {
         leastFrequentNumbers: TOTAL_COST,
+        leastFrequentOverOldestNumbers: TOTAL_COST,
         middleFrequentNumbers: TOTAL_COST,
         mostFrequentNumbers: TOTAL_COST,
         oldestNumbers: TOTAL_COST,
@@ -52,6 +57,9 @@
     }, collectNumbers = date => {
         LEAST_FREQUENT_NUMBERS.set(
                 date, frequentNumbers(leastFrequentNumberComparator));
+        
+        LEAST_FREQUENT_OVER_OLDEST_NUMBERS.set(
+                date, leastFrequentOverOldestNumbers());
         MIDDLE_FREQUENT_NUMBERS.set(date, middleFrequentNumbers());
         MOST_FREQUENT_NUMBERS.set(
                 date, frequentNumbers(mostFrequentNumberComparator));
@@ -61,6 +69,11 @@
         collectNumberPriceResults(date, result, LEAST_FREQUENT_NUMBERS,
                 "leastFrequentNumbers", LEAST_FREQUENT_NUMBER_PRICE_RESULTS,
                 LEAST_FREQUENT_NUMBER_PRICE_RESULT_COUNTS);
+        collectNumberPriceResults(date, result, 
+                LEAST_FREQUENT_OVER_OLDEST_NUMBERS,
+                "leastFrequentOverOldestNumbers", 
+                LEAST_FREQUENT_OVER_OLDEST_NUMBER_PRICE_RESULTS,
+                LEAST_FREQUENT_OVER_OLDEST_NUMBER_PRICE_RESULT_COUNTS);
         collectNumberPriceResults(date, result,
                 MIDDLE_FREQUENT_NUMBERS, "middleFrequentNumbers",
                 MIDDLE_FREQUENT_NUMBER_PRICE_RESULTS,
@@ -83,7 +96,12 @@
     const mappedFrequentNumbers = ([number]) => number;
     const frequentNumbers = comparator => Object.entries(FREQUENCIES).sort(
             comparator).slice(0, 6).map(mappedFrequentNumbers);
-    const middleFrequentNumbers = () => {
+    const leastFrequentOverOldestNumbers = () => {
+        return Object.entries(FREQUENCIES).map(([number, frequency]) => {
+            const age_ = AGES[number];
+            return [number, age_ ? frequency * 1.0 / age_ : frequency];
+        }).sort(leastFrequentNumberComparator).slice(0, 6).map(mappedFrequentNumbers);
+    }, middleFrequentNumbers = () => {
         const sortedFrequentNumbers = Object.entries(FREQUENCIES).sort(
                 leastFrequentNumberComparator).map(mappedFrequentNumbers);
         const sortedFrequentNumbersCount = sortedFrequentNumbers.length;
@@ -140,31 +158,37 @@
     console.info("RESULTS", RESULTS);
     console.info("FREQUENCIES", FREQUENCIES);
     console.info("LEAST_FREQUENT_NUMBERS", LEAST_FREQUENT_NUMBERS);
+    console.info("LEAST_FREQUENT_OVER_OLDEST_NUMBERS", LEAST_FREQUENT_OVER_OLDEST_NUMBERS);
     console.info("MIDDLE_FREQUENT_NUMBERS", MIDDLE_FREQUENT_NUMBERS);
     console.info("MOST_FREQUENT_NUMBERS", MOST_FREQUENT_NUMBERS);
     console.info("OLDEST_NUMBERS", OLDEST_NUMBERS);
     console.info("RANDOM_NUMBERS", RANDOM_NUMBERS);
     console.info("LEAST_FREQUENT_NUMBER_PRICE_RESULTS", LEAST_FREQUENT_NUMBER_PRICE_RESULTS);
+    console.info("LEAST_FREQUENT_OVER_OLDEST_NUMBER_PRICE_RESULTS", LEAST_FREQUENT_OVER_OLDEST_NUMBER_PRICE_RESULTS);
     console.info("MIDDLE_FREQUENT_NUMBER_PRICE_RESULTS", MIDDLE_FREQUENT_NUMBER_PRICE_RESULTS);
     console.info("MOST_FREQUENT_NUMBER_PRICE_RESULTS", MOST_FREQUENT_NUMBER_PRICE_RESULTS);
     console.info("OLDEST_NUMBER_PRICE_RESULTS", OLDEST_NUMBER_PRICE_RESULTS);
     console.info("RANDOM_NUMBER_PRICE_RESULTS", RANDOM_NUMBER_PRICE_RESULTS);
     console.info("LEAST_FREQUENT_NUMBER_PRICE_RESULT_COUNTS", LEAST_FREQUENT_NUMBER_PRICE_RESULT_COUNTS);
+    console.info("LEAST_FREQUENT_OVER_OLDEST_NUMBER_PRICE_RESULT_COUNTS", LEAST_FREQUENT_OVER_OLDEST_NUMBER_PRICE_RESULT_COUNTS);
     console.info("MIDDLE_FREQUENT_NUMBER_PRICE_RESULT_COUNTS", MIDDLE_FREQUENT_NUMBER_PRICE_RESULT_COUNTS);
     console.info("MOST_FREQUENT_NUMBER_PRICE_RESULT_COUNTS", MOST_FREQUENT_NUMBER_PRICE_RESULT_COUNTS);
     console.info("OLDEST_NUMBER_PRICE_RESULT_COUNTS", OLDEST_NUMBER_PRICE_RESULT_COUNTS);
     console.info("RANDOM_NUMBER_PRICE_RESULT_COUNTS", RANDOM_NUMBER_PRICE_RESULT_COUNTS);
     console.info("leastFrequentNumberPriceResultCountSum", numberPriceResultCountSum(LEAST_FREQUENT_NUMBER_PRICE_RESULT_COUNTS));
+    console.info("leastFrequentOverOldestNumberPriceResultCountSum", numberPriceResultCountSum(LEAST_FREQUENT_OVER_OLDEST_NUMBER_PRICE_RESULT_COUNTS));
     console.info("middleFrequentNumberPriceResultCountSum", numberPriceResultCountSum(MIDDLE_FREQUENT_NUMBER_PRICE_RESULT_COUNTS));
     console.info("mostFrequentNumberPriceResultCountSum", numberPriceResultCountSum(MOST_FREQUENT_NUMBER_PRICE_RESULT_COUNTS));
     console.info("oldestNumberPriceResultCountSum", numberPriceResultCountSum(OLDEST_NUMBER_PRICE_RESULT_COUNTS));
     console.info("randomNumberPriceResultCountSum", numberPriceResultCountSum(RANDOM_NUMBER_PRICE_RESULT_COUNTS));
     console.info("leastFrequentNumberPositivePriceResultCountSum", numberPositivePriceResultCountSum(LEAST_FREQUENT_NUMBER_PRICE_RESULT_COUNTS));
+    console.info("leastFrequentOverOldestNumberPositivePriceResultCountSum", numberPositivePriceResultCountSum(LEAST_FREQUENT_OVER_OLDEST_NUMBER_PRICE_RESULT_COUNTS));
     console.info("middleFrequentNumberPositivePriceResultCountSum", numberPositivePriceResultCountSum(MIDDLE_FREQUENT_NUMBER_PRICE_RESULT_COUNTS));
     console.info("mostFrequentNumberPositivePriceResultCountSum", numberPositivePriceResultCountSum(MOST_FREQUENT_NUMBER_PRICE_RESULT_COUNTS));
     console.info("oldestNumberPositivePriceResultCountSum", numberPositivePriceResultCountSum(OLDEST_NUMBER_PRICE_RESULT_COUNTS));
     console.info("randomNumberPositivePriceResultCountSum", numberPositivePriceResultCountSum(RANDOM_NUMBER_PRICE_RESULT_COUNTS));
     console.info("leastFrequentNumbers", frequentNumbers(leastFrequentNumberComparator));
+    console.info("leastFrequentOverOldestNumbers", leastFrequentOverOldestNumbers());
     console.info("middleFrequentNumbers", middleFrequentNumbers());
     console.info("mostFrequentNumbers", frequentNumbers(mostFrequentNumberComparator));
     console.info("oldestNumbers", oldestNumbers());
