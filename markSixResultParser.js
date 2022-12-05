@@ -1,3 +1,4 @@
+// jshint esversion: 6
 (() => {
     const DATE_CLASS = "resultDetailsCell2", DATE_REGEX = /[^0-9\/]+/gmi;
     const JSON_PATH = "oldMarkSixResults.json";
