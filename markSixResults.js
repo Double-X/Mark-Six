@@ -1,4 +1,5 @@
 // jshint esversion: 6
+// Search COUNT_SPECIAL to toggle between separating special numbers and not
 (() => {
     const AGES = Object.fromEntries([...new Array(49)].map((_, i) => {
         return [`${i + 1}`, 0];
@@ -48,6 +49,9 @@
         "leastFrequentPowerOverOldest",
         "middleFrequent",
         "mostFrequent",
+        "mostFrequentMinusOldest",
+        "mostFrequentOverOldest",
+        "mostFrequentPowerOverOldest",
         "oldest",
         "partitionModuloLeastFrequent",
         "partitionModuloLeastFrequentMinusOldest",
@@ -55,6 +59,9 @@
         "partitionModuloLeastFrequentPowerOverOldest",
         "partitionModuloMiddleFrequent",
         "partitionModuloMostFrequent",
+        "partitionModuloMostFrequentMinusOldest",
+        "partitionModuloMostFrequentOverOldest",
+        "partitionModuloMostFrequentPowerOverOldest",
         "partitionModuloOldest",
         "partitionValueLeastFrequent",
         "partitionValueLeastFrequentMinusOldest",
@@ -62,6 +69,9 @@
         "partitionValueLeastFrequentPowerOverOldest",
         "partitionValueMiddleFrequent",
         "partitionValueMostFrequent",
+        "partitionValueMostFrequentMinusOldest",
+        "partitionValueMostFrequentOverOldest",
+        "partitionValueMostFrequentPowerOverOldest",
         "partitionValueOldest",
         "random"
     ], TOTAL_COST = -COST * RESULTS.size;
@@ -86,20 +96,29 @@
         NUMBERS.leastFrequentPowerOverOldest.set(date, leastFrequentPowerOverOldestNumbers());
         NUMBERS.middleFrequent.set(date, middleFrequentNumbers());
         NUMBERS.mostFrequent.set(date, frequentNumbers(mostFrequentNumberComparator));
+        NUMBERS.mostFrequentMinusOldest.set(date, mostFrequentMinusOldestNumbers());
+        NUMBERS.mostFrequentOverOldest.set(date, mostFrequentOverOldestNumbers());
+        NUMBERS.mostFrequentPowerOverOldest.set(date, mostFrequentPowerOverOldestNumbers());
         NUMBERS.oldest.set(date, oldestNumbers());
         NUMBERS.partitionModuloLeastFrequent.set(date, partitionModuloFrequentNumbers(leastFrequentNumberComparator));
-        NUMBERS.partitionModuloLeastFrequentMinusOldest.set(date, partitionModuloFrequentMinusOldestNumbers());
-        NUMBERS.partitionModuloLeastFrequentOverOldest.set(date, partitionModuloFrequentOverOldestNumbers());
-        NUMBERS.partitionModuloLeastFrequentPowerOverOldest.set(date, partitionModuloFrequentPowerOverOldestNumbers());
+        NUMBERS.partitionModuloLeastFrequentMinusOldest.set(date, partitionModuloLeastFrequentMinusOldestNumbers());
+        NUMBERS.partitionModuloLeastFrequentOverOldest.set(date, partitionModuloLeastFrequentOverOldestNumbers());
+        NUMBERS.partitionModuloLeastFrequentPowerOverOldest.set(date, partitionModuloLeastFrequentPowerOverOldestNumbers());
         NUMBERS.partitionModuloMiddleFrequent.set(date, partitionModuloMiddleFrequentNumbers());
         NUMBERS.partitionModuloMostFrequent.set(date, partitionModuloFrequentNumbers(mostFrequentNumberComparator));
+        NUMBERS.partitionModuloMostFrequentMinusOldest.set(date, partitionModuloMostFrequentMinusOldestNumbers());
+        NUMBERS.partitionModuloMostFrequentOverOldest.set(date, partitionModuloMostFrequentOverOldestNumbers());
+        NUMBERS.partitionModuloMostFrequentPowerOverOldest.set(date, partitionModuloMostFrequentPowerOverOldestNumbers());
         NUMBERS.partitionModuloOldest.set(date, partitionModuloOldestNumbers());
         NUMBERS.partitionValueLeastFrequent.set(date, partitionValueFrequentNumbers(leastFrequentNumberComparator));
-        NUMBERS.partitionValueLeastFrequentMinusOldest.set(date, partitionValueFrequentMinusOldestNumbers());
-        NUMBERS.partitionValueLeastFrequentOverOldest.set(date, partitionValueFrequentOverOldestNumbers());
-        NUMBERS.partitionValueLeastFrequentPowerOverOldest.set(date, partitionValueFrequentPowerOverOldestNumbers());
+        NUMBERS.partitionValueLeastFrequentMinusOldest.set(date, partitionValueLeastFrequentMinusOldestNumbers());
+        NUMBERS.partitionValueLeastFrequentOverOldest.set(date, partitionValueLeastFrequentOverOldestNumbers());
+        NUMBERS.partitionValueLeastFrequentPowerOverOldest.set(date, partitionValueLeastFrequentPowerOverOldestNumbers());
         NUMBERS.partitionValueMiddleFrequent.set(date, partitionValueMiddleFrequentNumbers());
         NUMBERS.partitionValueMostFrequent.set(date, partitionValueFrequentNumbers(mostFrequentNumberComparator));
+        NUMBERS.partitionValueMostFrequentMinusOldest.set(date, partitionValueMostFrequentMinusOldestNumbers());
+        NUMBERS.partitionValueMostFrequentOverOldest.set(date, partitionValueMostFrequentOverOldestNumbers());
+        NUMBERS.partitionValueMostFrequentPowerOverOldest.set(date, partitionValueMostFrequentPowerOverOldestNumbers());
         NUMBERS.partitionValueOldest.set(date, partitionValueOldestNumbers());
         NUMBERS.random.set(date, randomNumbers());
     }, collectPriceResults = (date, result) => {
@@ -107,7 +126,8 @@
     }, collectAges = numbers => {
         const partitionModuli = {}, partitionValues = {};
         Object.keys(AGES).forEach(number => {
-            if (numbers.includes(number)) {
+            // COUNT_SPECIAL: Remove numbers.indexOf(number) < 6
+            if (numbers.includes(number) && numbers.indexOf(number) < 6) {
                 AGES[number] = 0;
                 const realNumber = +number;
                 partitionModuli[realNumber % 7] = true;
@@ -128,21 +148,34 @@
                 PARTITION_AGE_VALUES[partition]++;
             }
         });
-    }, collectFrequencies = numbers => numbers.forEach(number => {
+    };
+    // COUNT_SPECIAL: Remove slice(0, 6)
+    const collectFrequencies = numbers => numbers.slice(0, 6).forEach(number => {
         FREQUENCIES[number] = (FREQUENCIES[number] || 0) + 1;
         const realNumber = +number;
         const partitionModulo = realNumber % 7;
         const partitionValue = Math.floor((realNumber - 1) / 7);
         PARTITION_FREQUENCY_MODULI[partitionModulo] = (PARTITION_FREQUENCY_MODULI[partitionModulo] || 0) + 1;
         PARTITION_FREQUENCY_VALUES[partitionValue] = (PARTITION_FREQUENCY_VALUES[partitionValue] || 0) + 1;
-    }), leastFrequentNumberComparator = ([numberA, frequencyA], [numberB, frequencyB]) => frequencyA - frequencyB;
+    });
+    //
+    const leastFrequentNumberComparator = ([numberA, frequencyA], [numberB, frequencyB]) => frequencyA - frequencyB;
     const mostFrequentNumberComparator = ([numberA, frequencyA], [numberB, frequencyB]) => frequencyB - frequencyA;
     const mappedFrequentNumbers = ([number]) => number;
-    const frequentNumbers = comparator => Object.entries(FREQUENCIES).sort(comparator).slice(0, 6).map(mappedFrequentNumbers);
-    const leastFrequentOldestNumbers = relation => Object.entries(FREQUENCIES).map(relation).sort(leastFrequentNumberComparator).slice(0, 6).map(mappedFrequentNumbers);
-    const leastFrequentMinusOldestNumbers = leastFrequentOldestNumbers.bind(null, ([number, frequency]) => [number, frequency - AGES[number]]);
-    const leastFrequentOverOldestNumbers = leastFrequentOldestNumbers.bind(null, ([number, frequency]) => [number, frequency * 1.0 / AGES[number]]);
-    const leastFrequentPowerOverOldestNumbers = leastFrequentOldestNumbers.bind(null, ([number, frequency]) => [number, Math.pow(frequency, 1.0 / AGES[number])]);
+    const frequencyMinusAge = ([number, frequency]) => {
+        return [number, frequency - AGES[number]];
+    }, frequencyOverAge = ([number, frequency]) => {
+        return [number, frequency * 1.0 / AGES[number]];
+    }, frequencyPowerOverAge = ([number, frequency]) => {
+        return [number, Math.pow(frequency, 1.0 / AGES[number])];
+    }, frequentNumbers = comparator => Object.entries(FREQUENCIES).sort(comparator).slice(0, 6).map(mappedFrequentNumbers);
+    const frequentOldestNumbers = (relation, comparator) => Object.entries(FREQUENCIES).map(relation).sort(comparator).slice(0, 6).map(mappedFrequentNumbers);
+    const leastFrequentMinusOldestNumbers = frequentOldestNumbers.bind(null, frequencyMinusAge, leastFrequentNumberComparator);
+    const leastFrequentOverOldestNumbers = frequentOldestNumbers.bind(null, frequencyOverAge, leastFrequentNumberComparator);
+    const leastFrequentPowerOverOldestNumbers = frequentOldestNumbers.bind(null, frequencyPowerOverAge, leastFrequentNumberComparator);
+    const mostFrequentMinusOldestNumbers = frequentOldestNumbers.bind(null, frequencyMinusAge, mostFrequentNumberComparator);
+    const mostFrequentOverOldestNumbers = frequentOldestNumbers.bind(null, frequencyOverAge, mostFrequentNumberComparator);
+    const mostFrequentPowerOverOldestNumbers = frequentOldestNumbers.bind(null, frequencyPowerOverAge, mostFrequentNumberComparator);
     const middleFrequentNumbers = () => {
         const sortedFrequentNumbers = Object.entries(FREQUENCIES).sort(leastFrequentNumberComparator).map(mappedFrequentNumbers);
         const sortedFrequentNumbersCount = sortedFrequentNumbers.length;
@@ -172,36 +205,42 @@
         return numbers;
     }, partitionModuloFrequentNumbers = partitionFrequentNumbers.bind(null, FREQUENCIES, PARTITION_FREQUENCY_MODULI, PARTITION_MODULI);
     const partitionValueFrequentNumbers = partitionFrequentNumbers.bind(null, FREQUENCIES, PARTITION_FREQUENCY_VALUES, PARTITION_VALUES);
-    const partitionLeastFrequentOldestNumbers = (partitionFrequencies, partitions, partitionRelation, numberRelation) => {
+    const partitionFrequentOldestNumbers = (partitionFrequencies, partitions, partitionRelation, numberRelation, comparator) => {
         const numbers = [];
-        const entries = Object.entries(partitionFrequencies).map(partitionRelation).sort(leastFrequentNumberComparator);
+        const entries = Object.entries(partitionFrequencies).map(partitionRelation).sort(comparator);
         let repeatedPartitionCount = 7 - entries.length;
         if (repeatedPartitionCount <= 0) entries.splice(6, 1);
         entries.forEach(([partition]) => {
             const count = Math.min(partitionFrequencies[partition], repeatedPartitionCount + 1);
             if (repeatedPartitionCount > 0) repeatedPartitionCount -= count - 1;
             const partitionNumbers = partitions[partition];
-            numbers.push(...partitionNumbers.map(numberRelation).sort(leastFrequentNumberComparator).map(mappedFrequentNumbers).slice(0, count));
+            numbers.push(...partitionNumbers.map(numberRelation).sort(comparator).map(mappedFrequentNumbers).slice(0, count));
         });
         return numbers;
-    }, partitionLeastFrequentMinusOldestNumbers = (partitionFrequencies, partitionAges, partitions) => {
-        return partitionLeastFrequentOldestNumbers(partitionFrequencies, partitions, ([partition, frequency]) => {
+    }, partitionFrequentMinusOldestNumbers = (partitionFrequencies, partitionAges, partitions, comparator) => {
+        return partitionFrequentOldestNumbers(partitionFrequencies, partitions, ([partition, frequency]) => {
             return [partition, frequency - partitionAges[partition]];
-        }, number => [number, FREQUENCIES[number] - AGES[number]]);
-    }, partitionLeastFrequentOverOldestNumbers = (partitionFrequencies, partitionAges, partitions) => {
-        return partitionLeastFrequentOldestNumbers(partitionFrequencies, partitions, ([partition, frequency]) => {
+        }, number => [number, FREQUENCIES[number] - AGES[number]], comparator);
+    }, partitionFrequentOverOldestNumbers = (partitionFrequencies, partitionAges, partitions, comparator) => {
+        return partitionFrequentOldestNumbers(partitionFrequencies, partitions, ([partition, frequency]) => {
             return [partition, frequency * 1.0 / partitionAges[partition]];
-        }, number => [number, FREQUENCIES[number] * 1.0 / AGES[number]]);
-    }, partitionLeastFrequentPowerOverOldestNumbers = (partitionFrequencies, partitionAges, partitions) => {
-        return partitionLeastFrequentOldestNumbers(partitionFrequencies, partitions, ([partition, frequency]) => {
+        }, number => [number, FREQUENCIES[number] * 1.0 / AGES[number]], comparator);
+    }, partitionFrequentPowerOverOldestNumbers = (partitionFrequencies, partitionAges, partitions, comparator) => {
+        return partitionFrequentOldestNumbers(partitionFrequencies, partitions, ([partition, frequency]) => {
             return [partition, Math.pow(frequency, 1.0 / partitionAges[partition])];
-        }, number => [number, Math.pow(FREQUENCIES[number], 1.0 / AGES[number])]);
-    }, partitionModuloFrequentMinusOldestNumbers = partitionLeastFrequentMinusOldestNumbers.bind(null, PARTITION_FREQUENCY_MODULI, PARTITION_AGE_MODULI, PARTITION_MODULI);
-    const partitionModuloFrequentOverOldestNumbers = partitionLeastFrequentOverOldestNumbers.bind(null, PARTITION_FREQUENCY_MODULI, PARTITION_AGE_MODULI, PARTITION_MODULI);
-    const partitionModuloFrequentPowerOverOldestNumbers = partitionLeastFrequentPowerOverOldestNumbers.bind(null, PARTITION_FREQUENCY_MODULI, PARTITION_AGE_MODULI, PARTITION_MODULI);
-    const partitionValueFrequentMinusOldestNumbers = partitionLeastFrequentMinusOldestNumbers.bind(null, PARTITION_FREQUENCY_VALUES, PARTITION_AGE_VALUES, PARTITION_VALUES);
-    const partitionValueFrequentOverOldestNumbers = partitionLeastFrequentOverOldestNumbers.bind(null, PARTITION_FREQUENCY_VALUES, PARTITION_AGE_VALUES, PARTITION_VALUES);
-    const partitionValueFrequentPowerOverOldestNumbers = partitionLeastFrequentPowerOverOldestNumbers.bind(null, PARTITION_FREQUENCY_VALUES, PARTITION_AGE_VALUES, PARTITION_VALUES);
+        }, number => [number, Math.pow(FREQUENCIES[number], 1.0 / AGES[number])], comparator);
+    }, partitionModuloLeastFrequentMinusOldestNumbers = partitionFrequentMinusOldestNumbers.bind(null, PARTITION_FREQUENCY_MODULI, PARTITION_AGE_MODULI, PARTITION_MODULI, leastFrequentNumberComparator);
+    const partitionModuloLeastFrequentOverOldestNumbers = partitionFrequentOverOldestNumbers.bind(null, PARTITION_FREQUENCY_MODULI, PARTITION_AGE_MODULI, PARTITION_MODULI, leastFrequentNumberComparator);
+    const partitionModuloLeastFrequentPowerOverOldestNumbers = partitionFrequentPowerOverOldestNumbers.bind(null, PARTITION_FREQUENCY_MODULI, PARTITION_AGE_MODULI, PARTITION_MODULI, leastFrequentNumberComparator);
+    const partitionValueLeastFrequentMinusOldestNumbers = partitionFrequentMinusOldestNumbers.bind(null, PARTITION_FREQUENCY_VALUES, PARTITION_AGE_VALUES, PARTITION_VALUES, leastFrequentNumberComparator);
+    const partitionValueLeastFrequentOverOldestNumbers = partitionFrequentOverOldestNumbers.bind(null, PARTITION_FREQUENCY_VALUES, PARTITION_AGE_VALUES, PARTITION_VALUES, leastFrequentNumberComparator);
+    const partitionValueLeastFrequentPowerOverOldestNumbers = partitionFrequentPowerOverOldestNumbers.bind(null, PARTITION_FREQUENCY_VALUES, PARTITION_AGE_VALUES, PARTITION_VALUES, leastFrequentNumberComparator);
+    const partitionModuloMostFrequentMinusOldestNumbers = partitionFrequentMinusOldestNumbers.bind(null, PARTITION_FREQUENCY_MODULI, PARTITION_AGE_MODULI, PARTITION_MODULI, mostFrequentNumberComparator);
+    const partitionModuloMostFrequentOverOldestNumbers = partitionFrequentOverOldestNumbers.bind(null, PARTITION_FREQUENCY_MODULI, PARTITION_AGE_MODULI, PARTITION_MODULI, mostFrequentNumberComparator);
+    const partitionModuloMostFrequentPowerOverOldestNumbers = partitionFrequentPowerOverOldestNumbers.bind(null, PARTITION_FREQUENCY_MODULI, PARTITION_AGE_MODULI, PARTITION_MODULI, mostFrequentNumberComparator);
+    const partitionValueMostFrequentMinusOldestNumbers = partitionFrequentMinusOldestNumbers.bind(null, PARTITION_FREQUENCY_VALUES, PARTITION_AGE_VALUES, PARTITION_VALUES, mostFrequentNumberComparator);
+    const partitionValueMostFrequentOverOldestNumbers = partitionFrequentOverOldestNumbers.bind(null, PARTITION_FREQUENCY_VALUES, PARTITION_AGE_VALUES, PARTITION_VALUES, mostFrequentNumberComparator);
+    const partitionValueMostFrequentPowerOverOldestNumbers = partitionFrequentPowerOverOldestNumbers.bind(null, PARTITION_FREQUENCY_VALUES, PARTITION_AGE_VALUES, PARTITION_VALUES, mostFrequentNumberComparator);
     const partitionMiddleFrequentNumbers = (partitionFrequencies, partitions) => {
         const numbers = [];
         const entries = Object.entries(partitionFrequencies).sort(leastFrequentNumberComparator);
@@ -273,20 +312,29 @@
     console.info("leastFrequentPowerOverOldest", leastFrequentPowerOverOldestNumbers());
     console.info("middleFrequent", middleFrequentNumbers());
     console.info("mostFrequent", frequentNumbers(mostFrequentNumberComparator));
+    console.info("mostFrequentMinusOldest", mostFrequentOverOldestNumbers());
+    console.info("mostFrequentOverOldest", mostFrequentOverOldestNumbers());
+    console.info("mostFrequentPowerOverOldest", mostFrequentPowerOverOldestNumbers());
     console.info("oldest", oldestNumbers());
     console.info("partitionModuloLeastFrequent", partitionModuloFrequentNumbers(leastFrequentNumberComparator));
-    console.info("partitionModuloLeastFrequentMinusOldest", partitionModuloFrequentMinusOldestNumbers());
-    console.info("partitionModuloLeastFrequentOverOldest", partitionModuloFrequentOverOldestNumbers());
-    console.info("partitionModuloLeastFrequentPowerOverOldest", partitionModuloFrequentPowerOverOldestNumbers());
+    console.info("partitionModuloLeastFrequentMinusOldest", partitionModuloLeastFrequentMinusOldestNumbers());
+    console.info("partitionModuloLeastFrequentOverOldest", partitionModuloLeastFrequentOverOldestNumbers());
+    console.info("partitionModuloLeastFrequentPowerOverOldest", partitionModuloLeastFrequentPowerOverOldestNumbers());
     console.info("partitionModuloMiddleFrequent", partitionModuloMiddleFrequentNumbers());
     console.info("partitionModuloMostFrequent", partitionModuloFrequentNumbers(mostFrequentNumberComparator));
+    console.info("partitionModuloMostFrequentMinusOldest", partitionModuloMostFrequentMinusOldestNumbers());
+    console.info("partitionModuloMostFrequentOverOldest", partitionModuloMostFrequentOverOldestNumbers());
+    console.info("partitionModuloMostFrequentPowerOverOldest", partitionModuloMostFrequentPowerOverOldestNumbers());
     console.info("partitionModuloOldest", partitionModuloOldestNumbers());
     console.info("partitionValueLeastFrequent", partitionValueFrequentNumbers(leastFrequentNumberComparator));
-    console.info("partitionValueLeastFrequentMinusOldest", partitionValueFrequentMinusOldestNumbers());
-    console.info("partitionValueLeastFrequentOverOldest", partitionValueFrequentOverOldestNumbers());
-    console.info("partitionValueLeastFrequentPowerOverOldest", partitionValueFrequentPowerOverOldestNumbers());
+    console.info("partitionValueLeastFrequentMinusOldest", partitionValueLeastFrequentMinusOldestNumbers());
+    console.info("partitionValueLeastFrequentOverOldest", partitionValueLeastFrequentOverOldestNumbers());
+    console.info("partitionValueLeastFrequentPowerOverOldest", partitionValueLeastFrequentPowerOverOldestNumbers());
     console.info("partitionValueMiddleFrequent", partitionValueMiddleFrequentNumbers());
     console.info("partitionValueMostFrequent", partitionValueFrequentNumbers(mostFrequentNumberComparator));
+    console.info("partitionValueMostFrequentMinusOldest", partitionValueMostFrequentMinusOldestNumbers());
+    console.info("partitionValueMostFrequentOverOldest", partitionValueMostFrequentOverOldestNumbers());
+    console.info("partitionValueMostFrequentPowerOverOldest", partitionValueMostFrequentPowerOverOldestNumbers());
     console.info("partitionValueOldest", partitionValueOldestNumbers());
     console.info("random", randomNumbers());
     console.info("TOTAL_COST", TOTAL_COST);
