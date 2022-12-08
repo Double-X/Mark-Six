@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>Mark Six Bet Records</title>
+        <script type="text/javascript" src="oldMarkSixResults.json"></script>
+        <script type="text/javascript" src="markSixBetRecords.js"></script>
+        <script>
+            const RESULTS = new Map(OLD_RESULTS);
+            const dates = {}, reasons = {}, strategies = {};
+            const ascendingSort = (a, b) => a - b;
+            const matchCount = (bet, sortedResult) => {
+                return bet.slice(0).sort(ascendingSort).filter((number, i) => {
+                    return number === sortedResult[i];
+                }).length;
+            };
+            BET_RECORDS.forEach(([date, bets]) => {
+                const result_ = RESULTS[date];
+                if (!result_) return;
+                const sortedResultNumbers = result_.numbers.slice(0).sort(ascendingSort);
+                Object.entries(bets).forEach(([reason, bet]) => {
+                    const betNumbers = bet.numbers, { strategy } = bet;
+                    const matches = matchCount(betNumbers, sortedResultNumbers);
+                    dates[date] = matches;
+                    reasons[reason] = reasons[reason] || {};
+                    const reasonMatches = reasons[reason];
+                    reasonMatches[matches] = (reasonMatches[matches] || 0) + 1;
+                    strategies[strategy] = strategies[strategy] || {};
+                    const strategyMatches = strategies[strategy];
+                    strategyMatches[matches] = (strategyMatches[matches] || 0) + 1;
+                });
+            });
+            console.info("dates", dates);
+            console.info("reasons", reasons);
+            console.info("strategies", strategies);
+        </script>
+    </head>
+    <body />
+</html>
