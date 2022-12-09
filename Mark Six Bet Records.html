@@ -8,20 +8,18 @@
         <script>
             const RESULTS = new Map(OLD_RESULTS);
             const dates = {}, reasons = {}, strategies = {};
-            const ascendingSort = (a, b) => a - b;
-            const matchCount = (bet, sortedResult) => {
-                return bet.slice(0).sort(ascendingSort).filter((number, i) => {
-                    return number === sortedResult[i];
-                }).length;
+            const matchCount = (bet, result) => {
+                return bet.filter(number => result.includes(number)).length;
             };
             BET_RECORDS.forEach(([date, bets]) => {
-                const result_ = RESULTS[date];
+                const result_ = RESULTS.get(date);
                 if (!result_) return;
-                const sortedResultNumbers = result_.numbers.slice(0).sort(ascendingSort);
+                const dateMatches = dates[date] = {};
+                const resultNumbers = result_.numbers;
                 Object.entries(bets).forEach(([reason, bet]) => {
                     const betNumbers = bet.numbers, { strategy } = bet;
-                    const matches = matchCount(betNumbers, sortedResultNumbers);
-                    dates[date] = matches;
+                    const matches = matchCount(betNumbers, resultNumbers);
+                    dateMatches[reason] = matches;
                     reasons[reason] = reasons[reason] || {};
                     const reasonMatches = reasons[reason];
                     reasonMatches[matches] = (reasonMatches[matches] || 0) + 1;
