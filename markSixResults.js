@@ -160,10 +160,11 @@
             return sortedNumbers.some(number => {
                 return number >= range[0] && number <= range[1];
             });
+        }) || [0, 1].some(modulo => {
+            return sortedNumbers.every(number => number % 2 === modulo);
+        }) || [0, 1, 2, 3, 4, 5, 6, 7, 8, 9].some(modulo => {
+            return sortedNumbers.every(number => number % 10 === modulo);
         })) return false;
-        if (sortedNumbers.every(number => {
-            return number % 2 === 0;
-        }) || sortedNumbers.every(number => number % 2 === 1)) return false;
         let consecutiveNumberCount = 0;
         for (i = 1; i < 6; i++) {
             if (sortedNumbers[i] - sortedNumbers[i - 1] === 1) {
