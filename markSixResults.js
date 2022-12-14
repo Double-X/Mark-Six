@@ -152,7 +152,29 @@
         }, number => [number, Math.pow(FREQUENCIES[number], 1.0 / AGES[number])]);
     }, partitionOldestNumbers = (partitionAges, partitions) => Object.entries(partitionAges).sort(mostFrequentNumberComparator).slice(0, 6).map(([partition]) => {
         return partitions[partition].map(mappedNumberFrequencies.bind(null, AGES)).sort(mostFrequentNumberComparator).map(mappedFrequentNumbers)[0];
-    });
+    }), isGoodRandom = numbers => {
+        const sortedNumbers = numbers.map(number => {
+            return +number;
+        }).sort((numberA, numberB) => numberA - numberB);
+        if ([[1, 9], [10, 19], [20, 29], [30, 39], [40, 49]].every(range => {
+            return sortedNumbers.some(number => {
+                return number >= range[0] && number <= range[1];
+            });
+        })) return false;
+        if (sortedNumbers.every(number => {
+            return number % 2 === 0;
+        }) || sortedNumbers.every(number => number % 2 === 1)) return false;
+        let consecutiveNumberCount = 0;
+        for (i = 1; i < 6; i++) {
+            if (sortedNumbers[i] - sortedNumbers[i - 1] === 1) {
+                consecutiveNumberCount++;
+                if (consecutiveNumberCount > 2) return false;
+            } else consecutiveNumberCount = 0;
+        }
+        const sum = sortedNumbers.reduce((total, number) => total + number, 0);
+        if (sum < 91 || sum > 210) return false;
+        return sortedNumbers[0] <= 19 && sortedNumbers[5] > 30;
+    };
     const STRATEGIES = {
         leastFrequent: frequentNumbers.bind(null, leastFrequentNumberComparator),
         leastFrequentMinusOldest: frequentOldestNumbers.bind(null, frequencyMinusAge, leastFrequentNumberComparator),
@@ -194,11 +216,13 @@
         partitionValueMostFrequentPowerOverOldest: partitionFrequentPowerOverOldestNumbers.bind(null, PARTITION_FREQUENCY_VALUES, PARTITION_AGE_VALUES, PARTITION_VALUES, mostFrequentNumberComparator),
         partitionValueOldest: partitionOldestNumbers.bind(null, PARTITION_AGE_VALUES, PARTITION_VALUES),
         random: () => {
-            const allNumbers = Object.keys(AGES), resultantNumbers = [];
-            for (let i = 1; i <= 6; i++) {
-                resultantNumbers.push(...allNumbers.splice(Math.floor(Math.random() * allNumbers.length), 1));
+            while (true) {
+                const allNumbers = Object.keys(AGES), resultantNumbers = [];
+                for (let i = 1; i <= 6; i++) {
+                    resultantNumbers.push(...allNumbers.splice(Math.floor(Math.random() * allNumbers.length), 1));
+                }
+                if (isGoodRandom(resultantNumbers)) return resultantNumbers;
             }
-            return resultantNumbers;
         }
     }, STRATEGY_NAMES = Object.keys(STRATEGIES);
     const TOTAL_COST = -COST * RESULTS.size;
