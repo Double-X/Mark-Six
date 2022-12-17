@@ -82,5 +82,26 @@ const BET_RECORDS = [
                 strategy: "partitionValueLeastFrequentOverOldest"
             }
         }
+    ],
+    [
+        "17/12/2022",
+        {
+            control: {
+                numbers: ["33", "5", "20", "36", "9", "14"],
+                strategy: "random"
+            },
+            mostNetGain: {
+                numbers: ["33", "4", "16", "24", "8", "37"],
+                strategy: "partitionValueLeastFrequentOverOldest"
+            },
+            mostPositivePriceResultCountSum: {
+                numbers: ["37", "8", "36", "48", "16", "24"],
+                strategy: "leastFrequentOverOldest"
+            },
+            mostBiggerPriceResultCountSum: {
+                numbers: ["33", "4", "16", "24", "8", "37"],
+                strategy: "partitionValueLeastFrequentOverOldest"
+            }
+        }
     ]
 ];
