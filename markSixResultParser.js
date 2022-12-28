@@ -4,6 +4,7 @@
     const JSON_PATH = "oldMarkSixResults.json";
     const NUMBER_CLASS = "resultDetailsInner";
     const NUMBER_INDICES = [0, 1, 2, 3, 4, 5, 7];
+    const NUMBER_SRC_NEWER_POST = ".gif?CV=L4.03R2";
     const NUMBER_SRC_NEW_POST = ".gif?CV=L4.02R1_CRQ129532";
     const NUMBER_SRC_OLD_POST = ".gif?CV=L4.02R1";
     const NUMBER_SRC_PRE = "file:///F:/marksix/info/images/icon/no_";
@@ -25,7 +26,8 @@
             const src = spans.item(index).children.item(0).src;
             const srcNoPre = remove(src, NUMBER_SRC_PRE);
             const srcNoNewPost = remove(srcNoPre, NUMBER_SRC_NEW_POST);
-            return `${+remove(srcNoNewPost, NUMBER_SRC_OLD_POST)}`;
+            const srcNoNewerPost = remove(srcNoPre, NUMBER_SRC_NEWER_POST);
+            return `${+remove(srcNoNewerPost, NUMBER_SRC_OLD_POST)}`;
         });
     }, parsedPrices = div => {
         const prices = {};

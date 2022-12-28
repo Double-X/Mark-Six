@@ -17,7 +17,7 @@
         ["5.5", 0],
         ["6", 0]
     ], FIRST_DATE = "2010/11/09", FREQUENCIES = {}, IS_COUNT_SPECIAL = false;
-    const NET_GAINS = {}, NUMBERS = {};
+    const IS_SHOW_KEY_INFO_ONLY = true, NET_GAINS = {}, NUMBERS = {};
     const NUMBER_PRICE_RESULTS = {}, NUMBER_PRICE_RESULT_COUNTS = {};
     const PARTITION_AGE_MODULI = Object.fromEntries([
         ...new Array(7)
@@ -306,18 +306,20 @@
         return countNumber < 3.5 ? sum : sum + countNumber * times;
     }, 0);
     RESULTS.forEach(collectResults);
-    console.info("RESULTS", RESULTS);
-    console.info("FREQUENCIES", FREQUENCIES);
-    console.info("PARTITION_AGE_MODULI", PARTITION_AGE_MODULI);
-    console.info("PARTITION_AGE_VALUES", PARTITION_AGE_VALUES);
-    console.info("PARTITION_FREQUENCY_MODULI", PARTITION_FREQUENCY_MODULI);
-    console.info("PARTITION_FREQUENCY_VALUES", PARTITION_FREQUENCY_VALUES);
-    STRATEGY_NAMES.forEach(strategy => {
-        console.info(`NUMBERS.${strategy}`, NUMBERS[strategy]);
-    });
-    STRATEGY_NAMES.forEach(strategy => console.info(`NUMBER_PRICE_RESULTS.${strategy}`, NUMBER_PRICE_RESULTS[strategy]));
-    STRATEGY_NAMES.forEach(strategy => console.info(`NUMBER_PRICE_RESULT_COUNTS.${strategy}`, NUMBER_PRICE_RESULT_COUNTS[strategy]));
-    STRATEGY_NAMES.forEach(strategy => console.info(`numberPriceResultCountSum(${strategy})`, numberPriceResultCountSum(strategy)));
+    if (!IS_SHOW_KEY_INFO_ONLY) {
+        console.info("RESULTS", RESULTS);
+        console.info("FREQUENCIES", FREQUENCIES);
+        console.info("PARTITION_AGE_MODULI", PARTITION_AGE_MODULI);
+        console.info("PARTITION_AGE_VALUES", PARTITION_AGE_VALUES);
+        console.info("PARTITION_FREQUENCY_MODULI", PARTITION_FREQUENCY_MODULI);
+        console.info("PARTITION_FREQUENCY_VALUES", PARTITION_FREQUENCY_VALUES);
+        STRATEGY_NAMES.forEach(strategy => {
+            console.info(`NUMBERS.${strategy}`, NUMBERS[strategy]);
+        });
+        STRATEGY_NAMES.forEach(strategy => console.info(`NUMBER_PRICE_RESULTS.${strategy}`, NUMBER_PRICE_RESULTS[strategy]));
+        STRATEGY_NAMES.forEach(strategy => console.info(`NUMBER_PRICE_RESULT_COUNTS.${strategy}`, NUMBER_PRICE_RESULT_COUNTS[strategy]));
+        STRATEGY_NAMES.forEach(strategy => console.info(`numberPriceResultCountSum(${strategy})`, numberPriceResultCountSum(strategy)));
+    }
     STRATEGY_NAMES.forEach(strategy => {
         console.info(strategy, STRATEGIES[strategy]());
     });
@@ -325,15 +327,15 @@
         return [strategy, numberPositivePriceResultCountSum(strategy)];
     }).sort(mostFrequentNumberComparator).forEach(([strategy, sum]) => {
         console.info(`numberPositivePriceResultCountSum(${strategy})`, sum);
-    });STRATEGY_NAMES.map(strategy => {
+    });
+    STRATEGY_NAMES.map(strategy => {
         return [strategy, numberBiggerPriceResultCountSum(strategy)];
     }).sort(mostFrequentNumberComparator).forEach(([strategy, sum]) => {
         console.info(`numberBiggerPriceResultCountSum(${strategy})`, sum);
     });
+    if (!IS_SHOW_KEY_INFO_ONLY) console.info("TOTAL_COST", TOTAL_COST);
     const sortedNetGains = Object.entries(NET_GAINS).sort(mostFrequentNumberComparator);
     console.info("NET_GAINS", sortedNetGains);
-    console.info("TOTAL_COST", TOTAL_COST);
-    if (sortedNetGains[0][0] === "random" && sortedNetGains[0][1] > 0) {
-        console.warn("random has the best net gain!");
-    }
+    if (sortedNetGains[0][0] !== "random" || sortedNetGains[0][1] <= 0) return;
+    console.warn("random has the best net gain!");
 })();

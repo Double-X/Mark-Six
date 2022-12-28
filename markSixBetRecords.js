@@ -103,5 +103,110 @@ const BET_RECORDS = [
                 strategy: "partitionValueLeastFrequentOverOldest"
             }
         }
+    ],
+    [
+        "20/12/2022",
+        {
+            control: {
+                numbers: ["12", "38", "21", "42", "47", "39"],
+                strategy: "random"
+            },
+            mostNetGain: {
+                numbers: ["48", "4", "8", "16", "24", "33"],
+                strategy: "partitionValueLeastFrequentOverOldest"
+            },
+            mostPositivePriceResultCountSum: {
+                numbers: ["37", "8", "36", "48", "16", "24"],
+                strategy: "leastFrequentOverOldest"
+            },
+            mostBiggerPriceResultCountSum: {
+                numbers: ["48", "4", "8", "16", "24", "33"],
+                strategy: "partitionValueLeastFrequentOverOldest"
+            }
+        }
+    ],
+    [
+        "22/12/2022",
+        {
+            control: {
+                numbers: ["37", "24", "13", "23", "8", "1"],
+                strategy: "random"
+            },
+            mostNetGain: {
+                numbers: ["4", "16", "8", "33", "24", "42"],
+                strategy: "partitionValueLeastFrequentOverOldest"
+            },
+            mostPositivePriceResultCountSum: {
+                numbers: ["8", "48", "16", "24", "4", "23"],
+                strategy: "leastFrequentOverOldest"
+            },
+            mostBiggerPriceResultCountSum: {
+                numbers: ["4", "16", "8", "33", "24", "42"],
+                strategy: "partitionValueLeastFrequentOverOldest"
+            }
+        }
+    ],
+    [
+        "25/12/2022",
+        {
+            control: {
+                numbers: ["17", "10", "18", "37", "41", "32"],
+                strategy: "random"
+            },
+            mostNetGain: {
+                numbers: ["4", "8", "24", "21", "29", "42"],
+                strategy: "partitionValueLeastFrequentOverOldest"
+            },
+            mostPositivePriceResultCountSum: {
+                numbers: ["8", "48", "24", "4", "23", "21"],
+                strategy: "leastFrequentOverOldest"
+            },
+            mostBiggerPriceResultCountSum: {
+                numbers: ["4", "8", "24", "21", "29", "42"],
+                strategy: "partitionValueLeastFrequentOverOldest"
+            }
+        }
+    ],
+    [
+        "27/12/2022",
+        {
+            control: {
+                numbers: ["24", "18", "7", "6", "47", "20"],
+                strategy: "random"
+            },
+            mostNetGain: {
+                numbers: ["24", "48", "29", "4", "8", "21"],
+                strategy: "partitionValueLeastFrequentOverOldest"
+            },
+            mostPositivePriceResultCountSum: {
+                numbers: ["8", "48", "24", "4", "23", "21"],
+                strategy: "leastFrequentOverOldest"
+            },
+            mostBiggerPriceResultCountSum: {
+                numbers: ["24", "48", "29", "4", "8", "21"],
+                strategy: "partitionValueLeastFrequentOverOldest"
+            }
+        }
+    ],
+    [
+        "29/12/2022",
+        {
+            control: {
+                numbers: ["21", "25", "7", "26", "10", "38"],
+                strategy: "random"
+            },
+            mostNetGain: {
+                numbers: ["24", "4", "8", "21", "29", "42"],
+                strategy: "partitionValueLeastFrequentOverOldest"
+            },
+            mostPositivePriceResultCountSum: {
+                numbers: ["8", "48", "24", "4", "23", "21"],
+                strategy: "leastFrequentOverOldest"
+            },
+            mostBiggerPriceResultCountSum: {
+                numbers: ["24", "4", "8", "21", "29", "42"],
+                strategy: "partitionValueLeastFrequentOverOldest"
+            }
+        }
     ]
 ];
