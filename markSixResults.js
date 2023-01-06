@@ -317,9 +317,9 @@
             console.info(`NUMBERS.${strategy}`, NUMBERS[strategy]);
         });
         STRATEGY_NAMES.forEach(strategy => console.info(`NUMBER_PRICE_RESULTS.${strategy}`, NUMBER_PRICE_RESULTS[strategy]));
-        STRATEGY_NAMES.forEach(strategy => console.info(`NUMBER_PRICE_RESULT_COUNTS.${strategy}`, NUMBER_PRICE_RESULT_COUNTS[strategy]));
         STRATEGY_NAMES.forEach(strategy => console.info(`numberPriceResultCountSum(${strategy})`, numberPriceResultCountSum(strategy)));
     }
+    STRATEGY_NAMES.forEach(strategy => console.info(`NUMBER_PRICE_RESULT_COUNTS.${strategy}`, NUMBER_PRICE_RESULT_COUNTS[strategy]));
     STRATEGY_NAMES.forEach(strategy => {
         console.info(strategy, STRATEGIES[strategy]());
     });

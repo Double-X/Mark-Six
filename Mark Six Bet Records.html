@@ -7,7 +7,7 @@
         <script type="text/javascript" src="markSixBetRecords.js"></script>
         <script>
             const RESULTS = new Map(OLD_RESULTS);
-            const dates = {}, reasons = {}, strategies = {};
+            const dates = new Map(), reasons = {}, strategies = {};
             const matchCount = (bet, result) => {
                 const normalResult = result.slice(0, 6);
                 return bet.filter(number => {
@@ -17,7 +17,8 @@
             BET_RECORDS.forEach(([date, bets]) => {
                 const result_ = RESULTS.get(date);
                 if (!result_) return;
-                const dateMatches = dates[date] = {};
+                const dateMatches = {};
+                dates.set(date, dateMatches);
                 const resultNumbers = result_.numbers;
                 Object.entries(bets).forEach(([reason, bet]) => {
                     const betNumbers = bet.numbers, { strategy } = bet;
