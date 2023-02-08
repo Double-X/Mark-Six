@@ -17,8 +17,9 @@
         ["5.5", 0],
         ["6", 0]
     ], FIRST_DATE = "2010/11/09", FREQUENCIES = {}, IS_COUNT_SPECIAL = false;
-    const IS_SHOW_KEY_INFO_ONLY = true, NET_GAINS = {}, NUMBERS = {};
-    const NUMBER_PRICE_RESULTS = {}, NUMBER_PRICE_RESULT_COUNTS = {};
+    const IS_FORCE_RANDOM_BEST_GET_GAINS = false, IS_SHOW_KEY_INFO_ONLY = true;
+    const NET_GAINS = {}, NUMBERS = {}, NUMBER_PRICE_RESULTS = {};
+    const NUMBER_PRICE_RESULT_COUNTS = {};
     const PARTITION_AGE_MODULI = Object.fromEntries([
         ...new Array(7)
     ].map((_, i) => [i, 0])), PARTITION_AGE_VALUES = Object.fromEntries([
@@ -243,7 +244,13 @@
         collectFrequencies(numbers);
     }, collectNumbers = date => STRATEGY_NAMES.forEach(strategy => {
         NUMBERS[strategy].set(date, STRATEGIES[strategy]());
-    }), collectPriceResults = (date, result) => STRATEGY_NAMES.forEach(collectNumberPriceResults.bind(null, date, result));
+    }), collectNumberPriceResults = (date, result, strategy) => {
+        const numberPriceResult = priceResult(date, result, strategy);
+        NUMBER_PRICE_RESULTS[strategy].set(date, numberPriceResult);
+        const priceResultCount = `${numberPriceResult}`;
+        const priceResultCounts = NUMBER_PRICE_RESULT_COUNTS[strategy];
+        priceResultCounts.set(priceResultCount, priceResultCounts.get(priceResultCount) + 1);
+    }, collectPriceResults = (date, result) => STRATEGY_NAMES.forEach(collectNumberPriceResults.bind(null, date, result));
     const collectAges = numbers => {
         const partitionModuli = {}, partitionValues = {};
         Object.keys(AGES).forEach(number => {
@@ -275,13 +282,7 @@
         const partitionValue = Math.floor((realNumber - 1) / 7);
         PARTITION_FREQUENCY_MODULI[partitionModulo] = (PARTITION_FREQUENCY_MODULI[partitionModulo] || 0) + 1;
         PARTITION_FREQUENCY_VALUES[partitionValue] = (PARTITION_FREQUENCY_VALUES[partitionValue] || 0) + 1;
-    }), collectNumberPriceResults = (date, result, strategy) => {
-        const numberPriceResult = priceResult(date, result, strategy);
-        NUMBER_PRICE_RESULTS[strategy].set(date, numberPriceResult);
-        const priceResultCount = `${numberPriceResult}`;
-        const priceResultCounts = NUMBER_PRICE_RESULT_COUNTS[strategy];
-        priceResultCounts.set(priceResultCount, priceResultCounts.get(priceResultCount) + 1);
-    }, priceResult = (date, result, strategy) => {
+    }), priceResult = (date, result, strategy) => {
         const storedFrequentNumbers = NUMBERS[strategy].get(date);
         const { numbers, prices } = result;
         const normalNumbers = numbers.slice(0, 6);
@@ -336,6 +337,7 @@
     if (!IS_SHOW_KEY_INFO_ONLY) console.info("TOTAL_COST", TOTAL_COST);
     const sortedNetGains = Object.entries(NET_GAINS).sort(mostFrequentNumberComparator);
     console.info("NET_GAINS", sortedNetGains);
-    if (sortedNetGains[0][0] !== "random" || sortedNetGains[0][1] <= 0) return;
-    console.warn("random has the best net gain!");
+    if (sortedNetGains[0][0] === "random" && sortedNetGains[0][1] > 0) {
+        console.warn("random has the best net gain!");
+    } else if (IS_FORCE_RANDOM_BEST_GET_GAINS) window.location.reload();
 })();
