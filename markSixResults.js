@@ -17,7 +17,7 @@
         ["5.5", 0],
         ["6", 0]
     ], FIRST_DATE = "2010/11/09", FREQUENCIES = {}, IS_COUNT_SPECIAL = false;
-    const IS_FORCE_RANDOM_BEST_GET_GAINS = false, IS_SHOW_KEY_INFO_ONLY = true;
+    const IS_FORCE_RANDOM_BEST_GET_GAINS = true, IS_SHOW_KEY_INFO_ONLY = true;
     const NET_GAINS = {}, NUMBERS = {}, NUMBER_PRICE_RESULTS = {};
     const NUMBER_PRICE_RESULT_COUNTS = {};
     const PARTITION_AGE_MODULI = Object.fromEntries([
