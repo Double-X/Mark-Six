@@ -4,6 +4,7 @@
     const JSON_PATH = "oldMarkSixResults.json";
     const NUMBER_CLASS = "resultDetailsInner";
     const NUMBER_INDICES = [0, 1, 2, 3, 4, 5, 7];
+    const NUMBER_SRC_NEWER_POST_4 = "_CRQ000000131716";
     const NUMBER_SRC_NEWER_POST_3 = "b";
     const NUMBER_SRC_NEWER_POST_2 = "a_AppD_fix_CRQ130467";
     const NUMBER_SRC_NEWER_POST = ".gif?CV=L4.03R2";
@@ -33,7 +34,9 @@
                     remove(srcNoNewerPost, NUMBER_SRC_NEWER_POST_2);
             const srcNoNewerPost3 =
                     remove(srcNoNewerPost2, NUMBER_SRC_NEWER_POST_3);
-            return `${+remove(srcNoNewerPost3, NUMBER_SRC_OLD_POST)}`;
+            const srcNoNewerPost4 =
+                    remove(srcNoNewerPost3, NUMBER_SRC_NEWER_POST_4);
+            return `${+remove(srcNoNewerPost4, NUMBER_SRC_OLD_POST)}`;
         });
     }, parsedPrices = div => {
         const prices = {};
