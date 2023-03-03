@@ -153,10 +153,11 @@
         }, number => [number, Math.pow(FREQUENCIES[number], 1.0 / AGES[number])]);
     }, partitionOldestNumbers = (partitionAges, partitions) => Object.entries(partitionAges).sort(mostFrequentNumberComparator).slice(0, 6).map(([partition]) => {
         return partitions[partition].map(mappedNumberFrequencies.bind(null, AGES)).sort(mostFrequentNumberComparator).map(mappedFrequentNumbers)[0];
-    }), isGoodRandom = numbers => {
+    }), ascendingComparator = (numberA, numberB) => numberA - numberB;
+    const isGoodRandom = numbers => {
         const sortedNumbers = numbers.map(number => {
             return +number;
-        }).sort((numberA, numberB) => numberA - numberB);
+        }).sort(ascendingComparator);
         if ([[1, 9], [10, 19], [20, 29], [30, 39], [40, 49]].every(range => {
             return sortedNumbers.some(number => {
                 return number >= range[0] && number <= range[1];
@@ -322,7 +323,7 @@
     }
     STRATEGY_NAMES.forEach(strategy => console.info(`NUMBER_PRICE_RESULT_COUNTS.${strategy}`, NUMBER_PRICE_RESULT_COUNTS[strategy]));
     STRATEGY_NAMES.forEach(strategy => {
-        console.info(strategy, STRATEGIES[strategy]());
+        console.info(strategy, STRATEGIES[strategy]().sort(ascendingComparator));
     });
     STRATEGY_NAMES.map(strategy => {
         return [strategy, numberPositivePriceResultCountSum(strategy)];
