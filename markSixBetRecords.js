@@ -670,5 +670,26 @@ const BET_RECORDS = [
                 strategy: "partitionValueLeastFrequentPowerOverOldest"
             }
         }
+    ],
+    [
+        "09/03/2023",
+        {
+            control: {
+                numbers: ["3", "22", "28", "39", "41", "44"],
+                strategy: "random"
+            },
+            mostNetGain: {
+                numbers: ["4", "12", "20", "28", "34", "49"],
+                strategy: "partitionValueMostFrequentMinusOldest"
+            },
+            mostPositivePriceResultCountSum: {
+                numbers: ["5", "6", "7", "21", "24", "36"],
+                strategy: "leastFrequentOverOldest"
+            },
+            mostBiggerPriceResultCountSum: {
+                numbers: ["7", "10", "21", "24", "35", "43"],
+                strategy: "partitionValueLeastFrequentPowerOverOldest"
+            }
+        }
     ]
 ];
