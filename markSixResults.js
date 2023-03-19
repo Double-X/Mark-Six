@@ -165,7 +165,9 @@
         }) || [0, 1].some(modulo => {
             return sortedNumbers.every(number => number % 2 === modulo);
         }) || [0, 1, 2, 3, 4, 5, 6, 7, 8, 9].some(modulo => {
-            return sortedNumbers.every(number => number % 10 === modulo);
+            return sortedNumbers.filter(number => {
+                return number % 10 === modulo;
+            }).length > 2;
         })) return false;
         let consecutiveNumberCount = 0;
         for (i = 1; i < 6; i++) {
