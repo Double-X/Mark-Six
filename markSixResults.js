@@ -178,7 +178,10 @@
         }
         const sum = sortedNumbers.reduce((total, number) => total + number, 0);
         if (sum < 91 || sum > 210) return false;
-        return sortedNumbers[0] <= 19 && sortedNumbers[5] > 30;
+        if (sortedNumbers[0] > 19 || sortedNumbers[5] <= 30) return false;
+        return !OLD_RESULTS.some(([_, { numbers }]) => {
+            return sortedNumbers.every((number, i) => number === +numbers[i]);
+        });
     };
     const STRATEGIES = {
         leastFrequent: frequentNumbers.bind(null, leastFrequentNumberComparator),
