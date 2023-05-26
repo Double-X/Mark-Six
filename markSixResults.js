@@ -174,7 +174,11 @@
             return sortedNumbers.filter(number => {
                 return number % 10 === modulo;
             }).length > 2;
-        })) return false;
+        }) || sortedNumbers.filter(number => {
+            return number % 10 > 4;
+        }).length > 4 || sortedNumbers.filter(number => {
+            return number % 10 < 5;
+        }).length > 4) return false;
         let consecutiveNumberCount = 0;
         for (i = 1; i < 6; i++) {
             if (sortedNumbers[i] - sortedNumbers[i - 1] === 1) {

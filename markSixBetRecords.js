@@ -1326,7 +1326,7 @@ const BET_RECORDS = [
         "27/05/2023",
         {
             control: {
-                numbers: ["4", "8", "24", "26", "27", "40"],
+                numbers: ["13", "20", "27", "30", "42", "49"],
                 strategy: "random_Special"
             },
             mostNetGain: {
