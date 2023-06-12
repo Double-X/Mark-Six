@@ -20,8 +20,11 @@
         ["5", 0],
         ["5.5", 0],
         ["6", 0]
-    ], FIRST_DATE = "2010/11/09", FREQUENCIES = {}, IS_COUNT_SPECIAL = true;
-    const IS_FORCE_RANDOM_BEST_GET_GAINS = true, IS_SHOW_KEY_INFO_ONLY = true;
+    ], FIRST_DATE = "2010/11/09", FREQUENCIES = {}, IS_COUNT_SPECIAL = false;
+    const IS_FORCE_RANDOM_BEST_BIGGER_PRICE_RESULTS = false;
+    const IS_FORCE_RANDOM_BEST_GET_GAINS = false;
+    const IS_FORCE_RANDOM_BEST_POSITIVE_PRICE_RESULTS = false;
+    const IS_SHOW_KEY_INFO_ONLY = true;
     const NET_GAINS = {}, NUMBERS = {}, NUMBER_PRICE_RESULTS = {};
     const NUMBER_PRICE_RESULT_COUNTS = {};
     const PARTITION_AGE_MODULI = Object.fromEntries([
@@ -340,19 +343,27 @@
     STRATEGY_NAMES.forEach(strategy => {
         console.info(strategy, STRATEGIES[strategy]().sort(ascendingComparator));
     });
-    STRATEGY_NAMES.map(strategy => {
+    const sortedPositivePriceResults = STRATEGY_NAMES.map(strategy => {
         return [strategy, numberPositivePriceResultCountSum(strategy)];
-    }).sort(mostFrequentNumberComparator).forEach(([strategy, sum]) => {
+    }).sort(mostFrequentNumberComparator);
+    sortedPositivePriceResults.forEach(([strategy, sum]) => {
         console.info(`numberPositivePriceResultCountSum(${strategy})`, sum);
     });
-    STRATEGY_NAMES.map(strategy => {
+    const sortedBiggerPriceResults = STRATEGY_NAMES.map(strategy => {
         return [strategy, numberBiggerPriceResultCountSum(strategy)];
-    }).sort(mostFrequentNumberComparator).forEach(([strategy, sum]) => {
+    }).sort(mostFrequentNumberComparator);
+    sortedBiggerPriceResults.forEach(([strategy, sum]) => {
         console.info(`numberBiggerPriceResultCountSum(${strategy})`, sum);
     });
     if (!IS_SHOW_KEY_INFO_ONLY) console.info("TOTAL_COST", TOTAL_COST);
     const sortedNetGains = Object.entries(NET_GAINS).sort(mostFrequentNumberComparator);
     console.info("NET_GAINS", sortedNetGains);
+    if (sortedBiggerPriceResults[0][0] === "random" && sortedBiggerPriceResults[0][1] > 0) {
+        console.warn("random has the best bigger price result!");
+    } else if (IS_FORCE_RANDOM_BEST_BIGGER_PRICE_RESULTS) window.location.reload();
+    if (sortedPositivePriceResults[0][0] === "random" && sortedPositivePriceResults[0][1] > 0) {
+        console.warn("random has the best positive price result!");
+    } else if (IS_FORCE_RANDOM_BEST_POSITIVE_PRICE_RESULTS) window.location.reload();
     if (sortedNetGains[0][0] === "random" && sortedNetGains[0][1] > 0) {
         console.warn("random has the best net gain!");
     } else if (IS_FORCE_RANDOM_BEST_GET_GAINS) window.location.reload();
