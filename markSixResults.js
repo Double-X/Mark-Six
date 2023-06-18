@@ -318,12 +318,12 @@
         ...NUMBER_PRICE_RESULT_COUNTS[strategy]
     ].reduce((sum, [count, times]) => {
         const countNumber = +count;
-        return countNumber < 3 ? sum : sum + countNumber * times;
+        return countNumber < 3 ? sum : sum + (countNumber - 2.5) * times;
     }, 0), numberBiggerPriceResultCountSum = strategy => [
         ...NUMBER_PRICE_RESULT_COUNTS[strategy]
     ].reduce((sum, [count, times]) => {
         const countNumber = +count;
-        return countNumber < 3.5 ? sum : sum + countNumber * times;
+        return countNumber < 3.5 ? sum : sum + (countNumber - 3) * times;
     }, 0);
     RESULTS.forEach(collectResults);
     if (!IS_SHOW_KEY_INFO_ONLY) {
