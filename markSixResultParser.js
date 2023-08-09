@@ -4,6 +4,7 @@
     const JSON_PATH = "oldMarkSixResults.json";
     const NUMBER_CLASS = "resultDetailsInner";
     const NUMBER_INDICES = [0, 1, 2, 3, 4, 5, 7];
+    const NUMBER_SRC_NEWER_POST_7 = ".gif?CV=L4.05R2d";
     const NUMBER_SRC_NEWER_POST_6 = ".gif?CV=L4.04R2";
     const NUMBER_SRC_NEWER_POST_5 = ".gif?CV=L4.04R1a";
     const NUMBER_SRC_NEWER_POST_4 = "_CRQ000000131716";
@@ -42,7 +43,13 @@
                     remove(srcNoNewerPost4, NUMBER_SRC_NEWER_POST_5);
             const srcNoNewerPost6 =
                     remove(srcNoNewerPost5, NUMBER_SRC_NEWER_POST_6);
-            return `${+remove(srcNoNewerPost6, NUMBER_SRC_OLD_POST)}`;
+            const srcNoNewerPost7 =
+                    remove(srcNoNewerPost6, NUMBER_SRC_NEWER_POST_7);
+            const srcNoNewerPostFinal =
+                    remove(srcNoNewerPost7, NUMBER_SRC_OLD_POST);
+            const number = +srcNoNewerPostFinal;
+            if (isNaN(number)) console.warn(srcNoNewerPostFinal);
+            return `${number}`;
         });
     }, parsedPrices = div => {
         const prices = {};
