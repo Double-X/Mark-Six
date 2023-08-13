@@ -1914,7 +1914,70 @@ const BET_RECORDS = [
         "08/08/2023",
         {
             control: {
+                numbers: ["2", "20", "25", "33", "36", "45"],
+                strategy: "random_Special"
+            },
+            mostNetGain: {
+                numbers: ["16", "17", "18", "21", "22", "40"],
+                strategy: "partitionModuloMiddleFrequentMinusOldest_Special"
+            },
+            mostPositivePriceResultCountSum: {
+                numbers: ["6", "12", "19", "27", "32", "38"],
+                strategy: "partitionValueLeastFrequentPowerOverOldest_Special"
+            },
+            mostBiggerPriceResultCountSum: {
+                numbers: ["6", "11", "21", "27", "32", "38"],
+                strategy: "partitionValueLeastFrequentOverOldest"
+            }
+        }
+    ],
+    [
+        "10/08/2023",
+        {
+            control: {
+                numbers: ["3", "24", "30", "44", "45", "46"],
+                strategy: "random_Special"
+            },
+            mostNetGain: {
+                numbers: ["7", "16", "17", "22", "40", "46"],
+                strategy: "partitionModuloMiddleFrequentMinusOldest_Special"
+            },
+            mostPositivePriceResultCountSum: {
+                numbers: ["6", "12", "19", "27", "32", "49"],
+                strategy: "partitionValueLeastFrequentPowerOverOldest_Special"
+            },
+            mostBiggerPriceResultCountSum: {
+                numbers: ["6", "11", "21", "27", "32", "49"],
+                strategy: "partitionValueLeastFrequentOverOldest"
+            }
+        }
+    ],
+    [
+        "12/08/2023",
+        {
+            control: {
                 numbers: ["9", "22", "26", "32", "34", "46"],
+                strategy: "random_Special"
+            },
+            mostNetGain: {
+                numbers: ["3", "7", "16", "22", "40", "46"],
+                strategy: "partitionModuloMiddleFrequentMinusOldest_Special"
+            },
+            mostPositivePriceResultCountSum: {
+                numbers: ["6", "9", "19", "27", "32", "49"],
+                strategy: "partitionValueLeastFrequentPowerOverOldest_Special"
+            },
+            mostBiggerPriceResultCountSum: {
+                numbers: ["5", "11", "21", "27", "32", "49"],
+                strategy: "partitionValueLeastFrequentOverOldest"
+            }
+        }
+    ],
+    [
+        "15/08/2023",
+        {
+            control: {
+                numbers: ["1", "6", "12", "35", "44", "49"],
                 strategy: "random_Special"
             },
             mostNetGain: {
