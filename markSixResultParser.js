@@ -3,17 +3,18 @@
     const DATE_CLASS = "resultDetailsCell2", DATE_REGEX = /[^0-9\/]+/gmi;
     const JSON_PATH = "oldMarkSixResults.json";
     const NUMBER_CLASS = "resultDetailsInner";
-    const NUMBER_INDICES = [0, 1, 2, 3, 4, 5, 7];
-    const NUMBER_SRC_NEWER_POST_7 = ".gif?CV=L4.05R2d";
-    const NUMBER_SRC_NEWER_POST_6 = ".gif?CV=L4.04R2";
-    const NUMBER_SRC_NEWER_POST_5 = ".gif?CV=L4.04R1a";
-    const NUMBER_SRC_NEWER_POST_4 = "_CRQ000000131716";
-    const NUMBER_SRC_NEWER_POST_3 = "b";
-    const NUMBER_SRC_NEWER_POST_2 = "a_AppD_fix_CRQ130467";
-    const NUMBER_SRC_NEWER_POST = ".gif?CV=L4.03R2";
-    const NUMBER_SRC_NEW_POST = ".gif?CV=L4.02R1_CRQ129532";
-    const NUMBER_SRC_OLD_POST = ".gif?CV=L4.02R1";
-    const NUMBER_SRC_PRE = "file:///F:/marksix/info/images/icon/no_";
+    const NUMBER_INDICES = [0, 1, 2, 3, 4, 5, 7], NUMBER_SRC_POSTS = [
+        ".gif?CV=L4.02R1",
+        ".gif?CV=L4.02R1_CRQ129532",
+        ".gif?CV=L4.03R2",
+        "a_AppD_fix_CRQ130467",
+        "b",
+        "_CRQ000000131716",
+        ".gif?CV=L4.04R1a",
+        ".gif?CV=L4.04R2",
+        ".gif?CV=L4.05R2d",
+        "_CRQ000000136252"
+    ], NUMBER_SRC_PRE = "file:///F:/marksix/info/images/icon/no_";
     const RESULT_6_CLASS = "orangeNum2", RESULT_OTHER_CLASS = "orangeNum1";
     const RESULT_REGEX = /\D+/gmi;
     const parsedResult = innerHTML => {
@@ -30,25 +31,11 @@
         const spans = div.getElementsByClassName(NUMBER_CLASS);
         return NUMBER_INDICES.map(index => {
             const src = spans.item(index).children.item(0).src;
-            const srcNoPre = remove(src, NUMBER_SRC_PRE);
-            const srcNoNewPost = remove(srcNoPre, NUMBER_SRC_NEW_POST);
-            const srcNoNewerPost = remove(srcNoNewPost, NUMBER_SRC_NEWER_POST);
-            const srcNoNewerPost2 =
-                    remove(srcNoNewerPost, NUMBER_SRC_NEWER_POST_2);
-            const srcNoNewerPost3 =
-                    remove(srcNoNewerPost2, NUMBER_SRC_NEWER_POST_3);
-            const srcNoNewerPost4 =
-                    remove(srcNoNewerPost3, NUMBER_SRC_NEWER_POST_4);
-            const srcNoNewerPost5 =
-                    remove(srcNoNewerPost4, NUMBER_SRC_NEWER_POST_5);
-            const srcNoNewerPost6 =
-                    remove(srcNoNewerPost5, NUMBER_SRC_NEWER_POST_6);
-            const srcNoNewerPost7 =
-                    remove(srcNoNewerPost6, NUMBER_SRC_NEWER_POST_7);
-            const srcNoNewerPostFinal =
-                    remove(srcNoNewerPost7, NUMBER_SRC_OLD_POST);
-            const number = +srcNoNewerPostFinal;
-            if (isNaN(number)) console.warn(srcNoNewerPostFinal);
+            const srcNoPrePost = NUMBER_SRC_POSTS.reduce((srcNoPre, noPost) => {
+                return remove(srcNoPre, noPost);
+            }, remove(src, NUMBER_SRC_PRE));
+            const number = +srcNoPrePost;
+            if (isNaN(number)) console.warn(srcNoPrePost);
             return `${number}`;
         });
     }, parsedPrices = div => {
