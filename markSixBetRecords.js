@@ -2019,11 +2019,11 @@ const BET_RECORDS = [
         "22/08/2023",
         {
             control: {
-                numbers: ["3", "13", "24", "25", "30", "36"],
+                numbers: ["12", "16", "31", "33", "37", "38"],
                 strategy: "random_Special"
             },
             mostNetGain: {
-                numbers: ["7", "15", "17", "37", "40", "46"],
+                numbers: ["7", "15", "16", "17", "40", "46"],
                 strategy: "partitionModuloMiddleFrequentMinusOldest_Special"
             },
             mostPositivePriceResultCountSum: {
@@ -2031,7 +2031,7 @@ const BET_RECORDS = [
                 strategy: "partitionValueLeastFrequentPowerOverOldest_Special"
             },
             mostBiggerPriceResultCountSum: {
-                numbers: ["5", "11", "21", "32", "41", "49"],
+                numbers: ["6", "11", "21", "27", "32", "41"],
                 strategy: "partitionValueLeastFrequentOverOldest"
             }
         }
