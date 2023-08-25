@@ -2019,6 +2019,27 @@ const BET_RECORDS = [
         "22/08/2023",
         {
             control: {
+                numbers: ["3", "13", "24", "25", "30", "36"],
+                strategy: "random_Special"
+            },
+            mostNetGain: {
+                numbers: ["7", "15", "17", "37", "40", "46"],
+                strategy: "partitionModuloMiddleFrequentMinusOldest_Special"
+            },
+            mostPositivePriceResultCountSum: {
+                numbers: ["6", "9", "19", "27", "32", "40"],
+                strategy: "partitionValueLeastFrequentPowerOverOldest_Special"
+            },
+            mostBiggerPriceResultCountSum: {
+                numbers: ["5", "11", "21", "32", "41", "49"],
+                strategy: "partitionValueLeastFrequentOverOldest"
+            }
+        }
+    ],
+    [
+        "24/08/2023",
+        {
+            control: {
                 numbers: ["12", "16", "31", "33", "37", "38"],
                 strategy: "random_Special"
             },
@@ -2032,6 +2053,27 @@ const BET_RECORDS = [
             },
             mostBiggerPriceResultCountSum: {
                 numbers: ["6", "11", "21", "27", "32", "41"],
+                strategy: "partitionValueLeastFrequentOverOldest"
+            }
+        }
+    ],
+    [
+        "26/08/2023",
+        {
+            control: {
+                numbers: ["8", "10", "12", "21", "29", "46"],
+                strategy: "random_Special"
+            },
+            mostNetGain: {
+                numbers: ["7", "11", "15", "16", "17", "40"],
+                strategy: "partitionModuloMiddleFrequentMinusOldest_Special"
+            },
+            mostPositivePriceResultCountSum: {
+                numbers: ["2", "9", "19", "27", "32", "40"],
+                strategy: "partitionValueLeastFrequentPowerOverOldest_Special"
+            },
+            mostBiggerPriceResultCountSum: {
+                numbers: ["2", "11", "21", "27", "32", "41"],
                 strategy: "partitionValueLeastFrequentOverOldest"
             }
         }
