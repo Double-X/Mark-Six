@@ -2266,5 +2266,89 @@ const BET_RECORDS = [
                 strategy: "partitionValueLeastFrequentOverOldest"
             }
         }
+    ],
+    [
+        "19/09/2023",
+        {
+            control: {
+                numbers: ["6", "23", "28", "37", "38", "43"],
+                strategy: "random_Special"
+            },
+            mostNetGain: {
+                numbers: ["15", "16", "17", "35", "40", "46"],
+                strategy: "partitionModuloMiddleFrequentMinusOldest_Special"
+            },
+            mostPositivePriceResultCountSum: {
+                numbers: ["1", "9", "18", "23", "33", "37"],
+                strategy: "partitionValueLeastFrequentPowerOverOldest_Special"
+            },
+            mostBiggerPriceResultCountSum: {
+                numbers: ["1", "11", "18", "28", "35", "37"],
+                strategy: "partitionValueLeastFrequentOverOldest"
+            }
+        }
+    ],
+    [
+        "21/09/2023",
+        {
+            control: {
+                numbers: ["7", "21", "23", "28", "42", "47"],
+                strategy: "random_Special"
+            },
+            mostNetGain: {
+                numbers: ["11", "14", "15", "16", "17", "40"],
+                strategy: "partitionModuloMiddleFrequentMinusOldest_Special"
+            },
+            mostPositivePriceResultCountSum: {
+                numbers: ["1", "13", "18", "23", "33", "37"],
+                strategy: "partitionValueLeastFrequentPowerOverOldest_Special"
+            },
+            mostBiggerPriceResultCountSum: {
+                numbers: ["1", "11", "18", "28", "33", "43"],
+                strategy: "partitionValueLeastFrequentOverOldest"
+            }
+        }
+    ],
+    [
+        "23/09/2023",
+        {
+            control: {
+                numbers: ["15", "18", "24", "29", "32", "46"],
+                strategy: "random_Special"
+            },
+            mostNetGain: {
+                numbers: ["11", "14", "15", "17", "37", "40"],
+                strategy: "partitionModuloMiddleFrequentMinusOldest_Special"
+            },
+            mostPositivePriceResultCountSum: {
+                numbers: ["3", "13", "18", "23", "29", "36"],
+                strategy: "partitionValueLeastFrequentPowerOverOldest_Special"
+            },
+            mostBiggerPriceResultCountSum: {
+                numbers: ["7", "11", "18", "23", "29", "37"],
+                strategy: "partitionValueLeastFrequentOverOldest"
+            }
+        }
+    ],
+    [
+        "28/09/2023",
+        {
+            control: {
+                numbers: ["7", "12", "16", "24", "29", "34"],
+                strategy: "random_Special"
+            },
+            mostNetGain: {
+                numbers: ["11", "14", "15", "17", "37", "40"],
+                strategy: "partitionModuloMiddleFrequentMinusOldest_Special"
+            },
+            mostPositivePriceResultCountSum: {
+                numbers: ["7", "13", "18", "23", "29", "36"],
+                strategy: "partitionValueLeastFrequentPowerOverOldest_Special"
+            },
+            mostBiggerPriceResultCountSum: {
+                numbers: ["7", "11", "18", "23", "29", "37"],
+                strategy: "partitionValueLeastFrequentOverOldest"
+            }
+        }
     ]
 ];
