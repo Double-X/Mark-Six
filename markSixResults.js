@@ -20,7 +20,7 @@
         ["5", 0],
         ["5.5", 0],
         ["6", 0]
-    ], FIRST_DATE = "2010/11/09", FREQUENCIES = {}, IS_COUNT_SPECIAL = false;
+    ], FIRST_DATE = "2010/11/09", FREQUENCIES = {}, IS_COUNT_SPECIAL = true;
     const IS_FORCE_RANDOM_BEST_BIGGER_PRICE_RESULTS = false;
     const IS_FORCE_RANDOM_BEST_GET_GAINS = false;
     const IS_FORCE_RANDOM_BEST_POSITIVE_PRICE_RESULTS = false;
