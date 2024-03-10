@@ -3547,5 +3547,26 @@ const BET_RECORDS = [
                 strategy: "partitionModuloLeastFrequent"
             }
         }
+    ],
+    [
+        "12/03/2024",
+        {
+            control: {
+                numbers: ["5", "12", "14", "24", "45", "46"],
+                strategy: "random"
+            },
+            mostNetGain: {
+                numbers: ["5", "14", "19", "27", "40", "48"],
+                strategy: "partitionValueLeastFrequent"
+            },
+            mostPositivePriceResultCountSum: {
+                numbers: ["1", "14", "17", "28", "33", "40"],
+                strategy: "partitionValueLeastFrequentPowerOverOldest_Special"
+            },
+            mostBiggerPriceResultCountSum: {
+                numbers: ["19", "23", "36", "38", "39", "41"],
+                strategy: "partitionModuloLeastFrequent"
+            }
+        }
     ]
 ];
