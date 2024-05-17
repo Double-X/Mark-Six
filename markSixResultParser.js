@@ -21,7 +21,8 @@
         ".gif?CV=L4.06R0",
         "c",
         ".gif?CV=L4.07R2a",
-        ".gif?CV=L4.08R2"
+        ".gif?CV=L4.08R2",
+        ".gif?CV=CRQ000000143692_BAU"
     ], NUMBER_SRC_PRE = "file:///F:/marksix/info/images/icon/no_";
     const RESULT_6_CLASS = "orangeNum2", RESULT_OTHER_CLASS = "orangeNum1";
     const RESULT_REGEX = /\D+/gmi;
