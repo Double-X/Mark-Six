@@ -21,11 +21,12 @@
         ["5.5", 0],
         ["6", 0]
     ], FIRST_DATE = "2010/11/09", FREQUENCIES = {}, WEIGHTED_FREQUENCIES = {};
-    const IS_COUNT_SPECIAL = false;
+    const IS_COUNT_SPECIAL = true;
     const IS_FORCE_RANDOM_BEST_BIGGER_PRICE_RESULTS = true;
     const IS_FORCE_RANDOM_BEST_GET_GAINS = true;
     const IS_FORCE_RANDOM_BEST_POSITIVE_PRICE_RESULTS = true;
     const IS_SHOW_KEY_INFO_ONLY = true;
+    const SPECIAL_FREQUENCY_WEIGHT = -5;
     const NET_GAINS = {}, NUMBERS = {}, NUMBER_PRICE_RESULTS = {};
     const NUMBER_PRICE_RESULT_COUNTS = {};
     const PARTITION_AGE_MODULI = Object.fromEntries([
@@ -333,20 +334,22 @@
                 PARTITION_AGE_VALUES[partition]++;
             }
         });
-    }, collectFrequencies = numbers => (IS_COUNT_SPECIAL ? numbers : numbers.slice(0, 6)).forEach(number => {
-        FREQUENCIES[number] = (FREQUENCIES[number] || 0) + 1;
+    }, collectFrequencies = numbers => (IS_COUNT_SPECIAL ? numbers : numbers.slice(0, 6)).forEach((number, i) => {
+        const frequency = i === 6 ? SPECIAL_FREQUENCY_WEIGHT : 1;
+        FREQUENCIES[number] = (FREQUENCIES[number] || 0) + frequency;
         const realNumber = +number;
         const partitionModulo = realNumber % 7;
         const partitionValue = Math.floor((realNumber - 1) / 7);
-        PARTITION_FREQUENCY_MODULI[partitionModulo] = (PARTITION_FREQUENCY_MODULI[partitionModulo] || 0) + 1;
-        PARTITION_FREQUENCY_VALUES[partitionValue] = (PARTITION_FREQUENCY_VALUES[partitionValue] || 0) + 1;
-    }), collectWeightedFrequencies = ([_, { numbers }], i) => (IS_COUNT_SPECIAL ? numbers : numbers.slice(0, 6)).forEach(number => {
-        WEIGHTED_FREQUENCIES[number] = (WEIGHTED_FREQUENCIES[number] || 0) + i + 1;
+        PARTITION_FREQUENCY_MODULI[partitionModulo] = (PARTITION_FREQUENCY_MODULI[partitionModulo] || 0) + frequency;
+        PARTITION_FREQUENCY_VALUES[partitionValue] = (PARTITION_FREQUENCY_VALUES[partitionValue] || 0) + frequency;
+    }), collectWeightedFrequencies = ([_, { numbers }], i) => (IS_COUNT_SPECIAL ? numbers : numbers.slice(0, 6)).forEach((number, j) => {
+        const frequency = i + 1 * (j === 6 ? SPECIAL_FREQUENCY_WEIGHT : 1);
+        WEIGHTED_FREQUENCIES[number] = (WEIGHTED_FREQUENCIES[number] || 0) + frequency;
         const realNumber = +number;
         const partitionModulo = realNumber % 7;
         const partitionValue = Math.floor((realNumber - 1) / 7);
-        WEIGHTED_PARTITION_FREQUENCY_MODULI[partitionModulo] = (WEIGHTED_PARTITION_FREQUENCY_MODULI[partitionModulo] || 0) + i + 1;
-        WEIGHTED_PARTITION_FREQUENCY_VALUES[partitionValue] = (WEIGHTED_PARTITION_FREQUENCY_VALUES[partitionValue] || 0) + i + 1;
+        WEIGHTED_PARTITION_FREQUENCY_MODULI[partitionModulo] = (WEIGHTED_PARTITION_FREQUENCY_MODULI[partitionModulo] || 0) + frequency;
+        WEIGHTED_PARTITION_FREQUENCY_VALUES[partitionValue] = (WEIGHTED_PARTITION_FREQUENCY_VALUES[partitionValue] || 0) + frequency;
     }), priceResult = (date, result, strategy) => {
         const storedFrequentNumbers = NUMBERS[strategy].get(date);
         const { numbers, prices } = result;
