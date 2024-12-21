@@ -5773,5 +5773,110 @@ const BET_RECORDS = [
                 strategy: "partitionModuloMostFrequentPowerOverOldest_Special-5"
             }
         }
+    ],
+    [
+        "12/12/2024",
+        {
+            control: {
+                numbers: ["3", "4", "17", "18", "32", "45"],
+                strategy: "random"
+            },
+            mostNetGain: {
+                numbers: ["3", "4", "6", "33", "43", "44"],
+                strategy: "partitionModuloMostFrequentPowerOverOldest_Special-5"
+            },
+            mostPositivePriceResultCountSum: {
+                numbers: ["6", "7", "8", "37", "45", "46"],
+                strategy: "partitionModuloLeastFrequentPowerOverOldest_Special-5"
+            },
+            mostBiggerPriceResultCountSum: {
+                numbers: ["3", "4", "6", "33", "43", "44"],
+                strategy: "partitionModuloMostFrequentPowerOverOldest_Special-5"
+            }
+        }
+    ],
+    [
+        "14/12/2024",
+        {
+            control: {
+                numbers: ["6", "7", "13", "31", "32", "44"],
+                strategy: "random"
+            },
+            mostNetGain: {
+                numbers: ["7", "10", "16", "18", "22", "33"],
+                strategy: "partitionModuloMostFrequentPowerOverOldest_Special-5"
+            },
+            mostPositivePriceResultCountSum: {
+                numbers: ["6", "7", "8", "19", "30", "46"],
+                strategy: "partitionModuloLeastFrequentPowerOverOldest_Special-5"
+            },
+            mostBiggerPriceResultCountSum: {
+                numbers: ["7", "10", "16", "18", "22", "33"],
+                strategy: "partitionModuloMostFrequentPowerOverOldest_Special-5"
+            }
+        }
+    ],
+    [
+        "17/12/2024",
+        {
+            control: {
+                numbers: ["6", "9", "12", "17", "28", "40"],
+                strategy: "random"
+            },
+            mostNetGain: {
+                numbers: ["1", "7", "16", "18", "33", "38"],
+                strategy: "partitionModuloMostFrequentPowerOverOldest_Special-5"
+            },
+            mostPositivePriceResultCountSum: {
+                numbers: ["6", "7", "8", "19", "30", "45"],
+                strategy: "partitionModuloLeastFrequentPowerOverOldest_Special-5"
+            },
+            mostBiggerPriceResultCountSum: {
+                numbers: ["1", "7", "16", "18", "33", "38"],
+                strategy: "partitionModuloMostFrequentPowerOverOldest_Special-5"
+            }
+        }
+    ],
+    [
+        "19/12/2024",
+        {
+            control: {
+                numbers: ["10", "14", "20", "27", "36", "41"],
+                strategy: "random"
+            },
+            mostNetGain: {
+                numbers: ["6", "7", "9", "10", "11", "26"],
+                strategy: "partitionModuloMostFrequentPowerOverOldest_Special-5"
+            },
+            mostPositivePriceResultCountSum: {
+                numbers: ["2", "7", "8", "19", "25", "38"],
+                strategy: "partitionModuloLeastFrequentPowerOverOldest_Special-5"
+            },
+            mostBiggerPriceResultCountSum: {
+                numbers: ["6", "7", "9", "10", "11", "26"],
+                strategy: "partitionModuloMostFrequentPowerOverOldest_Special-5"
+            }
+        }
+    ],
+    [
+        "21/12/2024",
+        {
+            control: {
+                numbers: ["14", "19", "22", "31", "32", "39"],
+                strategy: "random"
+            },
+            mostNetGain: {
+                numbers: ["1", "2", "3", "6", "7", "11"],
+                strategy: "partitionModuloMostFrequentPowerOverOldest_Special-5"
+            },
+            mostPositivePriceResultCountSum: {
+                numbers: ["7", "8", "19", "25", "44", "45"],
+                strategy: "partitionModuloLeastFrequentPowerOverOldest_Special-5"
+            },
+            mostBiggerPriceResultCountSum: {
+                numbers: ["1", "2", "3", "6", "7", "11"],
+                strategy: "partitionModuloMostFrequentPowerOverOldest_Special-5"
+            }
+        }
     ]
 ];
