@@ -6235,5 +6235,26 @@ const BET_RECORDS = [
                 strategy: "partitionModuloMostFrequentPowerOverOldest_Special-5"
             }
         }
+    ],
+    [
+        "13/02/2025",
+        {
+            control: {
+                numbers: ["5", "22", "23", "46", "47", "49"],
+                strategy: "random"
+            },
+            mostNetGain: {
+                numbers: ["5", "6", "15", "17", "30", "39"],
+                strategy: "partitionModuloMostFrequentPowerOverOldest_Special-5"
+            },
+            mostPositivePriceResultCountSum: {
+                numbers: ["2", "7", "8", "10", "46", "47"],
+                strategy: "partitionModuloLeastFrequentPowerOverOldest_Special-5"
+            },
+            mostBiggerPriceResultCountSum: {
+                numbers: ["5", "6", "15", "17", "30", "39"],
+                strategy: "partitionModuloMostFrequentPowerOverOldest_Special-5"
+            }
+        }
     ]
 ];
