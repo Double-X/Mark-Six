@@ -6298,5 +6298,89 @@ const BET_RECORDS = [
                 strategy: "partitionModuloMostFrequentPowerOverOldest_Special-5"
             }
         }
+    ],
+    [
+        "20/02/2025",
+        {
+            control: {
+                numbers: ["2", "5", "14", "21", "28", "44"],
+                strategy: "random"
+            },
+            mostNetGain: {
+                numbers: ["1", "3", "6", "7", "23", "39"],
+                strategy: "partitionModuloMostFrequentPowerOverOldest_Special-5"
+            },
+            mostPositivePriceResultCountSum: {
+                numbers: ["7", "10", "37", "43", "46", "47"],
+                strategy: "partitionModuloLeastFrequentPowerOverOldest_Special-5"
+            },
+            mostBiggerPriceResultCountSum: {
+                numbers: ["1", "3", "6", "7", "23", "39"],
+                strategy: "partitionModuloMostFrequentPowerOverOldest_Special-5"
+            }
+        }
+    ],
+    [
+        "22/02/2025",
+        {
+            control: {
+                numbers: ["2", "5", "14", "21", "28", "44"],
+                strategy: "random"
+            },
+            mostNetGain: {
+                numbers: ["3", "6", "7", "22", "39", "44"],
+                strategy: "partitionModuloMostFrequentPowerOverOldest_Special-5"
+            },
+            mostPositivePriceResultCountSum: {
+                numbers: ["7", "10", "37", "43", "46", "47"],
+                strategy: "partitionModuloLeastFrequentPowerOverOldest_Special-5"
+            },
+            mostBiggerPriceResultCountSum: {
+                numbers: ["3", "6", "7", "22", "39", "44"],
+                strategy: "partitionModuloMostFrequentPowerOverOldest_Special-5"
+            }
+        }
+    ],
+    [
+        "25/02/2025",
+        {
+            control: {
+                numbers: ["7", "8", "19", "21", "25", "41"],
+                strategy: "random"
+            },
+            mostNetGain: {
+                numbers: ["6", "7", "15", "33", "39", "44"],
+                strategy: "partitionModuloMostFrequentPowerOverOldest_Special-5"
+            },
+            mostPositivePriceResultCountSum: {
+                numbers: ["7", "10", "37", "43", "46", "47"],
+                strategy: "partitionModuloLeastFrequentPowerOverOldest_Special-5"
+            },
+            mostBiggerPriceResultCountSum: {
+                numbers: ["6", "7", "15", "33", "39", "44"],
+                strategy: "partitionModuloMostFrequentPowerOverOldest_Special-5"
+            }
+        }
+    ],
+    [
+        "27/02/2025",
+        {
+            control: {
+                numbers: ["7", "8", "19", "21", "25", "41"],
+                strategy: "random"
+            },
+            mostNetGain: {
+                numbers: ["1", "2", "6", "7", "11", "47"],
+                strategy: "partitionModuloMostFrequentPowerOverOldest_Special-5"
+            },
+            mostPositivePriceResultCountSum: {
+                numbers: ["7", "8", "10", "12", "37", "46"],
+                strategy: "partitionModuloLeastFrequentPowerOverOldest_Special-5"
+            },
+            mostBiggerPriceResultCountSum: {
+                numbers: ["1", "2", "6", "7", "11", "47"],
+                strategy: "partitionModuloMostFrequentPowerOverOldest_Special-5"
+            }
+        }
     ]
 ];
