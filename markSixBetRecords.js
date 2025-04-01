@@ -6571,5 +6571,110 @@ const BET_RECORDS = [
                 strategy: "partitionModuloMostFrequentPowerOverOldest_Special-5"
             }
         }
+    ],
+    [
+        "22/03/2025",
+        {
+            control: {
+                numbers: ["9", "22", "24", "29", "37", "44"],
+                strategy: "random"
+            },
+            mostNetGain: {
+                numbers: ["6", "7", "16", "24", "39", "43"],
+                strategy: "partitionModuloMostFrequentPowerOverOldest_Special-5"
+            },
+            mostPositivePriceResultCountSum: {
+                numbers: ["7", "10", "12", "22", "37", "46"],
+                strategy: "partitionModuloLeastFrequentPowerOverOldest_Special-5"
+            },
+            mostBiggerPriceResultCountSum: {
+                numbers: ["6", "7", "16", "24", "39", "43"],
+                strategy: "partitionModuloMostFrequentPowerOverOldest_Special-5"
+            }
+        }
+    ],
+    [
+        "25/03/2025",
+        {
+            control: {
+                numbers: ["3", "10", "15", "16", "22", "37"],
+                strategy: "random"
+            },
+            mostNetGain: {
+                numbers: ["6", "12", "23", "24", "36", "46"],
+                strategy: "partitionModuloMostFrequentPowerOverOldest_Special-5"
+            },
+            mostPositivePriceResultCountSum: {
+                numbers: ["5", "7", "10", "18", "22", "37"],
+                strategy: "partitionModuloLeastFrequentPowerOverOldest_Special-5"
+            },
+            mostBiggerPriceResultCountSum: {
+                numbers: ["6", "12", "23", "24", "36", "46"],
+                strategy: "partitionModuloMostFrequentPowerOverOldest_Special-5"
+            }
+        }
+    ],
+    [
+        "27/03/2025",
+        {
+            control: {
+                numbers: ["5", "20", "21", "28", "40", "45"],
+                strategy: "random"
+            },
+            mostNetGain: {
+                numbers: ["6", "8", "11", "12", "17", "23"],
+                strategy: "partitionModuloMostFrequentPowerOverOldest_Special-5"
+            },
+            mostPositivePriceResultCountSum: {
+                numbers: ["5", "7", "10", "18", "22", "37"],
+                strategy: "partitionModuloLeastFrequentPowerOverOldest_Special-5"
+            },
+            mostBiggerPriceResultCountSum: {
+                numbers: ["6", "8", "11", "12", "17", "23"],
+                strategy: "partitionModuloMostFrequentPowerOverOldest_Special-5"
+            }
+        }
+    ],
+    [
+        "29/03/2025",
+        {
+            control: {
+                numbers: ["5", "20", "21", "28", "40", "45"],
+                strategy: "random"
+            },
+            mostNetGain: {
+                numbers: ["7", "10", "11", "15", "19", "44"],
+                strategy: "partitionModuloMostFrequentPowerOverOldest_Special-5"
+            },
+            mostPositivePriceResultCountSum: {
+                numbers: ["6", "7", "18", "22", "31", "37"],
+                strategy: "partitionModuloLeastFrequentPowerOverOldest_Special-5"
+            },
+            mostBiggerPriceResultCountSum: {
+                numbers: ["7", "10", "11", "15", "19", "44"],
+                strategy: "partitionModuloMostFrequentPowerOverOldest_Special-5"
+            }
+        }
+    ],
+    [
+        "01/04/2025",
+        {
+            control: {
+                numbers: ["5", "20", "24", "41", "42", "45"],
+                strategy: "random"
+            },
+            mostNetGain: {
+                numbers: ["3", "5", "6", "15", "44", "46"],
+                strategy: "partitionModuloMostFrequentPowerOverOldest_Special-5"
+            },
+            mostPositivePriceResultCountSum: {
+                numbers: ["7", "18", "22", "31", "33", "37"],
+                strategy: "partitionModuloLeastFrequentPowerOverOldest_Special-5"
+            },
+            mostBiggerPriceResultCountSum: {
+                numbers: ["3", "5", "6", "15", "44", "46"],
+                strategy: "partitionModuloMostFrequentPowerOverOldest_Special-5"
+            }
+        }
     ]
 ];
