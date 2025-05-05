@@ -6865,5 +6865,110 @@ const BET_RECORDS = [
                 strategy: "partitionModuloMostFrequentPowerOverOldest_Special-5"
             }
         }
+    ],
+    [
+        "26/04/2025",
+        {
+            control: {
+                numbers: ["7", "12", "25", "29", "32", "38"],
+                strategy: "random"
+            },
+            mostNetGain: {
+                numbers: ["3", "6", "7", "12", "16", "32"],
+                strategy: "partitionModuloMostFrequentPowerOverOldest_Special-5"
+            },
+            mostPositivePriceResultCountSum: {
+                numbers: ["2", "7", "8", "18", "31", "40"],
+                strategy: "partitionModuloLeastFrequentPowerOverOldest_Special-5"
+            },
+            mostBiggerPriceResultCountSum: {
+                numbers: ["16", "22", "27", "36", "38", "46"],
+                strategy: "middleWeightedFrequentMinusOldest"
+            }
+        }
+    ],
+    [
+        "29/04/2025",
+        {
+            control: {
+                numbers: ["5", "9", "16", "34", "43", "45"],
+                strategy: "random"
+            },
+            mostNetGain: {
+                numbers: ["6", "7", "8", "11", "12", "16"],
+                strategy: "partitionModuloMostFrequentPowerOverOldest_Special-5"
+            },
+            mostPositivePriceResultCountSum: {
+                numbers: ["2", "6", "7", "25", "31", "43"],
+                strategy: "partitionModuloLeastFrequentPowerOverOldest_Special-5"
+            },
+            mostBiggerPriceResultCountSum: {
+                numbers: ["16", "22", "27", "36", "38", "46"],
+                strategy: "middleWeightedFrequentMinusOldest"
+            }
+        }
+    ],
+    [
+        "01/05/2025",
+        {
+            control: {
+                numbers: ["8", "24", "25", "33", "39", "42"],
+                strategy: "random"
+            },
+            mostNetGain: {
+                numbers: ["6", "7", "24", "30", "32", "47"],
+                strategy: "partitionModuloMostFrequentPowerOverOldest_Special-5"
+            },
+            mostPositivePriceResultCountSum: {
+                numbers: ["2", "7", "8", "25", "31", "40"],
+                strategy: "partitionModuloLeastFrequentPowerOverOldest_Special-5"
+            },
+            mostBiggerPriceResultCountSum: {
+                numbers: ["6", "7", "24", "30", "32", "47"],
+                strategy: "partitionModuloMostFrequentPowerOverOldest_Special-5"
+            }
+        }
+    ],
+    [
+        "03/05/2025",
+        {
+            control: {
+                numbers: ["8", "24", "25", "33", "39", "42"],
+                strategy: "random"
+            },
+            mostNetGain: {
+                numbers: ["4", "6", "7", "24", "30", "47"],
+                strategy: "partitionModuloMostFrequentPowerOverOldest_Special-5"
+            },
+            mostPositivePriceResultCountSum: {
+                numbers: ["1", "2", "7", "25", "38", "40"],
+                strategy: "partitionModuloLeastFrequentPowerOverOldest_Special-5"
+            },
+            mostBiggerPriceResultCountSum: {
+                numbers: ["4", "6", "7", "24", "30", "47"],
+                strategy: "partitionModuloMostFrequentPowerOverOldest_Special-5"
+            }
+        }
+    ],
+    [
+        "06/05/2025",
+        {
+            control: {
+                numbers: ["2", "4", "15", "36", "44", "49"],
+                strategy: "random"
+            },
+            mostNetGain: {
+                numbers: ["6", "7", "18", "24", "30", "47"],
+                strategy: "partitionModuloMostFrequentPowerOverOldest_Special-5"
+            },
+            mostPositivePriceResultCountSum: {
+                numbers: ["1", "7", "25", "31", "37", "40"],
+                strategy: "partitionModuloLeastFrequentPowerOverOldest_Special-5"
+            },
+            mostBiggerPriceResultCountSum: {
+                numbers: ["6", "7", "18", "24", "30", "47"],
+                strategy: "partitionModuloMostFrequentPowerOverOldest_Special-5"
+            }
+        }
     ]
 ];
