@@ -22,9 +22,11 @@
         ["6", 0]
     ], FIRST_DATE = "2010/11/09", FREQUENCIES = {}, WEIGHTED_FREQUENCIES = {};
     const IS_COUNT_SPECIAL = true;
+    // Any of them being true might lead to instant PC shutdown without BSOD
     const IS_FORCE_RANDOM_BEST_BIGGER_PRICE_RESULTS = false;
     const IS_FORCE_RANDOM_BEST_GET_GAINS = false;
     const IS_FORCE_RANDOM_BEST_POSITIVE_PRICE_RESULTS = false;
+    //
     const IS_SHOW_KEY_INFO_ONLY = true;
     const SPECIAL_FREQUENCY_WEIGHT = -5;
     const NET_GAINS = {}, NUMBERS = {}, NUMBER_PRICE_RESULTS = {};
