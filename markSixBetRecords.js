@@ -7579,5 +7579,68 @@ const BET_RECORDS = [
                 strategy: "partitionModuloMostFrequentPowerOverOldest_Special-5"
             }
         }
+    ],
+    [
+        "19/09/2026",
+        {
+            control: {
+                numbers: ["3", "8", "23", "36", "37", "49"],
+                strategy: "random"
+            },
+            mostNetGain: {
+                numbers: ["4", "6", "8", "9", "17", "47"],
+                strategy: "partitionModuloMostFrequentPowerOverOldest_Special-5"
+            },
+            mostPositivePriceResultCountSum: {
+                numbers: ["12", "18", "28", "30", "32", "34"],
+                strategy: "mostWeightedFrequent"
+            },
+            mostBiggerPriceResultCountSum: {
+                numbers: ["4", "6", "8", "9", "17", "47"],
+                strategy: "partitionModuloMostFrequentPowerOverOldest_Special-5"
+            }
+        }
+    ],
+    [
+        "26/09/2026",
+        {
+            control: {
+                numbers: ["2", "3", "17", "22", "26", "39"],
+                strategy: "random"
+            },
+            mostNetGain: {
+                numbers: ["5", "6", "7", "8", "11", "31"],
+                strategy: "partitionModuloMostFrequentPowerOverOldest_Special-5"
+            },
+            mostPositivePriceResultCountSum: {
+                numbers: ["12", "18", "28", "30", "32", "34"],
+                strategy: "mostWeightedFrequent"
+            },
+            mostBiggerPriceResultCountSum: {
+                numbers: ["5", "6", "7", "8", "11", "31"],
+                strategy: "partitionModuloMostFrequentPowerOverOldest_Special-5"
+            }
+        }
+    ],
+    [
+        "01/10/2026",
+        {
+            control: {
+                numbers: ["11", "14", "18", "24", "37", "41"],
+                strategy: "random"
+            },
+            mostNetGain: {
+                numbers: ["4", "6", "7", "19", "31", "44"],
+                strategy: "partitionModuloMostFrequentPowerOverOldest_Special-5"
+            },
+            mostPositivePriceResultCountSum: {
+                numbers: ["12", "18", "28", "30", "32", "34"],
+                strategy: "mostWeightedFrequent"
+            },
+            mostBiggerPriceResultCountSum: {
+                numbers: ["4", "6", "7", "19", "31", "44"],
+                strategy: "partitionModuloMostFrequentPowerOverOldest_Special-5"
+            }
+        }
     ]
 ];
